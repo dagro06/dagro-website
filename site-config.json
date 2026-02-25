@@ -33,7 +33,7 @@
     },
     "diensten": {
       "title": "Diensten | Dagro Digital",
-      "description": "Ontdek onze premium marketing diensten: SEO, CRO, Online Adverteren, E-mailmarketing en meer."
+      "description": "Ontdek onze premium marketing diensten: SEO, CRO, Online Adverteren, Data & Analyse en Advertorials."
     },
     "over-ons": {
       "title": "Over Ons | Dagro Digital",
@@ -62,6 +62,14 @@
     "diensten/data-analyse": {
       "title": "Data & Analyse | Dagro Digital",
       "description": "Maak beslissingen op basis van feiten. Van tracking setup en rapportages tot custom dashboards die laten zien welke marketing inspanningen echt werken."
+    },
+    "blog": {
+      "title": "Blog | Dagro Digital",
+      "description": "Inzichten, tips en strategieën over online marketing, SEO, adverteren en meer."
+    },
+    "cases": {
+      "title": "Cases | Dagro Digital",
+      "description": "Bekijk onze resultaten. Ontdek hoe we bedrijven helpen groeien met data-driven marketing."
     }
   },
   "content": {

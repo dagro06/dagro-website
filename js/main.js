@@ -363,24 +363,31 @@ function initRippleEffect() {
 }
 
 // ============================================
-// PARALLAX EFFECTS
+// PARALLAX EFFECTS (rAF-throttled)
 // ============================================
+let parallaxTicking = false;
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
+    if (!parallaxTicking) {
+        requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
 
-    // Parallax for hero orbs
-    document.querySelectorAll('.hero-orb').forEach((orb, index) => {
-        const speed = (index + 1) * 0.05;
-        orb.style.transform = `translateY(${scrolled * speed}px)`;
-    });
+            // Parallax for hero orbs
+            document.querySelectorAll('.hero-orb').forEach((orb, index) => {
+                const speed = (index + 1) * 0.05;
+                orb.style.transform = `translateY(${scrolled * speed}px)`;
+            });
 
-    // Parallax for floating badges
-    document.querySelectorAll('.floating-badge').forEach((badge, index) => {
-        const speed = (index + 1) * 0.02;
-        const baseTransform = badge.style.transform || '';
-        badge.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
+            // Parallax for floating badges
+            document.querySelectorAll('.floating-badge').forEach((badge, index) => {
+                const speed = (index + 1) * 0.02;
+                badge.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+
+            parallaxTicking = false;
+        });
+        parallaxTicking = true;
+    }
+}, { passive: true });
 
 // ============================================
 // LOGO ANIMATION ON LOAD

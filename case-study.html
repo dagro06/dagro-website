@@ -205,20 +205,20 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <span style="display: flex; align-items: center; gap: 12px; color: var(--text-gray);">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
                                 </svg>
                                 Tuitjenhorn, Nederland
-                            </a>
+                            </span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 Dagro Digital. Alle rechten voorbehouden.</p>
+                <p>&copy; 2026 Dagro Digital. Alle rechten voorbehouden.</p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/dagro06/" target="_blank" class="social-link" aria-label="LinkedIn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -275,6 +275,23 @@
                 }
 
                 document.getElementById('case-content').innerHTML = c.content;
+
+                // Inject Article schema
+                var schema = {
+                    '@context': 'https://schema.org',
+                    '@type': 'Article',
+                    'headline': c.title,
+                    'description': c.excerpt || '',
+                    'datePublished': c.date || '',
+                    'author': { '@type': 'Organization', 'name': 'Dagro Digital', 'url': 'https://dagrodigital.nl' },
+                    'publisher': { '@type': 'Organization', 'name': 'Dagro Digital' },
+                    'mainEntityOfPage': window.location.href
+                };
+                if (c.featuredImage) schema.image = c.featuredImage;
+                var schemaScript = document.createElement('script');
+                schemaScript.type = 'application/ld+json';
+                schemaScript.textContent = JSON.stringify(schema);
+                document.head.appendChild(schemaScript);
             })
             .catch(function() {
                 document.getElementById('case-title').textContent = 'Case niet gevonden';
