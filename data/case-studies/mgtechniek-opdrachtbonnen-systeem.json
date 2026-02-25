@@ -1,0 +1,12 @@
+{
+  "title": "MG. Techniek opdrachtbonnen systeem",
+  "slug": "mgtechniek-opdrachtbonnen-systeem",
+  "clientName": "",
+  "services": [],
+  "date": "2026-02-20T07:22:00.000Z",
+  "excerpt": "MG. Techniek BV verwerkte opdrachtbonnen volledig op papier. De eigenaar, niet digitaal vaardig, had geen eenvoudige manier om professionele opdrachtbonnen aan te maken, bij te houden en als PDF te archiveren. Dit kostte maandelijks uren aan handmatige administratie.",
+  "featuredImage": "",
+  "kpis": [],
+  "content": "<p><strong>Oplossing:</strong> Een op maat gebouwd single-page dashboard, gepinned als bookmark, waarmee de eigenaar met minimale handelingen nieuwe opdrachtbonnen aanmaakt. Het systeem genereert automatisch een oplopend bonnummer (Opdrachtbon 001, 002, etc.), vult de aanmaakdatum en het weeknummer automatisch in, en slaat de bon op als nette A4 PDF met het bedrijfslogo en de juiste bestandsnaam. Bestaande bonnen zijn direct terug te vinden en te bewerken in het overzicht.</p><p><strong>Deliverable:</strong> Custom web dashboard (HTML/CSS/JS, geen login nodig), gehost of lokaal draaiend, met PDF-export via browser print-to-PDF of jsPDF.</p>",
+  "publishedAt": "2026-02-25T09:32:50.067Z"
+}
