@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-02-24T10:00:00Z",
+  "design": {
+    "colors": {
+      "--primary": "#16552F",
+      "--primary-light": "#1E6B3D",
+      "--primary-dark": "#0D1F15",
+      "--gold": "#C5A572",
+      "--gold-bright": "#D4AF37",
+      "--off-white": "#F8F6F3",
+      "--text-dark": "#1a1a1a",
+      "--text-gray": "#5a5a5a"
+    },
+    "fonts": {
+      "--font-display": "'Playfair Display', Georgia, serif",
+      "--font-body": "'Outfit', -apple-system, sans-serif",
+      "--font-accent": "'Cormorant Garamond', Georgia, serif"
+    },
+    "fontSizes": {
+      "h1": "clamp(48px, 8vw, 120px)",
+      "h2": "clamp(36px, 5vw, 72px)",
+      "h3": "clamp(28px, 3vw, 42px)",
+      "h4": "clamp(20px, 2vw, 28px)",
+      "body": "clamp(16px, 1.2vw, 18px)"
+    }
+  },
+  "favicon": "/favicon.svg",
+  "meta": {
+    "index": {
+      "title": "Dagro Digital | Strategische Marketing Partner",
+      "description": "Data-driven marketing strategieën voor e-commerce merken, lokale bedrijven en marketingbureaus die serieus willen groeien."
+    },
+    "diensten": {
+      "title": "Diensten | Dagro Digital",
+      "description": "Ontdek onze premium marketing diensten: SEO, CRO, Online Adverteren, E-mailmarketing en meer."
+    },
+    "over-ons": {
+      "title": "Over Ons | Dagro Digital",
+      "description": "Leer Dagro Digital kennen. Data-driven marketing strategieën voor ambitieuze ondernemers."
+    },
+    "contact": {
+      "title": "Contact | Dagro Digital",
+      "description": "Neem contact op met Dagro Digital. Plan een strategisch gesprek of stel je vraag."
+    },
+    "diensten/seo": {
+      "title": "SEO & Content | Dagro Digital",
+      "description": "Word structureel beter vindbaar in Google met een doordachte SEO-strategie. Van zoekwoordenonderzoek tot contentproductie die resultaat oplevert."
+    },
+    "diensten/advertorials": {
+      "title": "Advertorials & Landingspagina's | Dagro Digital",
+      "description": "Conversiegerichte landingspagina's en advertorials die bezoekers overtuigen en omzetten in klanten. Van strategie tot design binnen 14 dagen."
+    },
+    "diensten/cro": {
+      "title": "Conversie-optimalisatie (CRO) | Dagro Digital",
+      "description": "Haal meer omzet uit je bestaande verkeer. Via A/B-tests, heatmaps en data-analyse verhogen we je conversiepercentage structureel."
+    },
+    "diensten/online-adverteren": {
+      "title": "Online Adverteren (Google & Meta Ads) | Dagro Digital",
+      "description": "Winstgevende advertentiecampagnes op Google en Meta. Van strategie en creatie tot dagelijkse optimalisatie voor maximaal rendement."
+    },
+    "diensten/data-analyse": {
+      "title": "Data & Analyse | Dagro Digital",
+      "description": "Maak beslissingen op basis van feiten. Van tracking setup en rapportages tot custom dashboards die laten zien welke marketing inspanningen echt werken."
+    }
+  },
+  "content": {
+    "index": {
+      "hero-eyebrow": "Strategische Marketing Partner",
+      "hero-title": "Bouw je <br><span class=\"highlight\">groeimachine</span>",
+      "hero-subtitle": "Voor ondernemers die klaar zijn om te schalen",
+      "hero-description": "Je hebt een goed product en een groeiend klantenbestand. Nu is het tijd voor een marketingsysteem dat meegroeit met je ambities. Wij bouwen de strategie, content en campagnes die structureel nieuwe klanten aantrekken en bestaande klanten langer vasthouden.",
+      "services-label": "Onze Expertise",
+      "services-title": "Premium Marketing <em>Diensten</em>",
+      "services-description": "Van strategie tot executie bouwen wij complete marketingsystemen waarin alle onderdelen elkaar versterken en samen zorgen voor duurzame groei.",
+      "card-seo-title": "SEO & Content",
+      "card-seo-desc": "Wij bouwen een topicstructuur en contentplan die ervoor zorgen dat je doelgroep je vindt wanneer ze actief op zoek zijn naar jouw oplossing.",
+      "card-advertorials-title": "Advertorials",
+      "card-advertorials-desc": "Conversiegerichte landingspagina's en salespagina's die overtuigen. Gebouwd op bewezen copywriting principes en consumentenpsychologie voor maximale impact.",
+      "card-cro-title": "CRO",
+      "card-cro-desc": "We analyseren waar bezoekers afhaken in je funnel en testen systematisch verbeteringen tot je conversiepercentage structureel stijgt.",
+      "card-ads-title": "Online Adverteren",
+      "card-ads-desc": "Campagnes op Google en Meta die schaalbaar én winstgevend zijn, met continue optimalisatie op basis van data.",
+      "card-data-title": "Data & Analyse",
+      "card-data-desc": "Dashboards en rapportages die helder maken welke marketing efforts daadwerkelijk bijdragen aan je omzet. Van GA4 setup tot actionable insights.",
+      "value-label": "Waarom Dagro Digital",
+      "value-title": "Een verlengstuk van <em>je team</em>",
+      "value-p1": "Wij geloven niet in marketing als losse projecten of campagnes die op zichzelf staan. Dagro Digital bouwt complete marketingsystemen waarin SEO, content, advertising en conversie-optimalisatie samen zorgen voor een voorspelbare stroom aan nieuwe klanten.",
+      "value-quote": "Marketing is een investering in groei. Wij zorgen dat elke euro rendeert.",
+      "value-p2": "Van strategie tot executie, van eerste websitebezoeker tot terugkerende klant. Met een data-gedreven aanpak en focus op meetbare resultaten helpen we ambitieuze ondernemers hun online aanwezigheid structureel te verbeteren.",
+      "value-stat": "150%",
+      "value-stat-label": "Gemiddelde ROI stijging",
+      "process-label": "Onze Werkwijze",
+      "process-title": "Van strategie naar <em>resultaat</em>",
+      "process-1-title": "Analyse",
+      "process-1-desc": "We beginnen met een grondige analyse van je huidige situatie, markt en concurrentie om de grootste kansen te identificeren.",
+      "process-2-title": "Strategie",
+      "process-2-desc": "Op basis van de analyse ontwikkelen we een concreet plan met duidelijke doelen, kanalen en een realistische tijdlijn.",
+      "process-3-title": "Executie",
+      "process-3-desc": "Wij nemen de uitvoering volledig uit handen, van content creatie en campagne management tot technische implementaties.",
+      "process-4-title": "Optimalisatie",
+      "process-4-desc": "Door continu te meten en te testen maken we elke maand de resultaten beter en je marketingbudget effectiever.",
+      "cta-title": "Klaar om te groeien?",
+      "cta-description": "Plan een strategisch gesprek en ontdek hoe we jouw marketing naar het volgende niveau kunnen tillen. We bespreken je huidige situatie en laten zien waar de grootste kansen liggen.",
+      "footer-description": "Data-driven marketing strategieën voor ambitieuze ondernemers die serieus willen groeien.",
+      "footer-email": "daan@dagrodigital.nl",
+      "footer-phone": "+31 6 24189075",
+      "footer-location": "Tuitjenhorn, Nederland"
+    },
+    "diensten": {
+      "hero-eyebrow": "Onze Expertise",
+      "hero-title": "Premium Marketing <em>Diensten</em>",
+      "hero-description": "Van strategie tot executie. Wij bouwen complete marketingsystemen waarin alles elkaar versterkt. Kies de dienst die past bij jouw groeiambitie.",
+      "cta-title": "Klaar om te starten?",
+      "cta-description": "Bespreek je doelen en ontdek welke diensten het beste bij jouw situatie passen."
+    },
+    "over-ons": {
+      "hero-eyebrow": "Over Dagro Digital",
+      "hero-title": "Marketing met <em>impact</em>",
+      "hero-description": "Wij zijn een strategische marketing partner die meedenkt, meedoet en meetbare resultaten levert voor ambitieuze ondernemers.",
+      "story-label": "Het verhaal",
+      "story-title": "Van frustratie naar <em>oplossing</em>",
+      "story-stat": "5+",
+      "story-stat-label": "Jaar ervaring",
+      "story-p1": "Dagro Digital is ontstaan uit frustratie. Frustratie over marketingbureaus die grote beloftes doen maar weinig leveren. Over rapportages vol vanity metrics die niets zeggen over daadwerkelijke groei. Over strategieën die op papier mooi klinken maar in de praktijk niet werken.",
+      "story-p2": "Daarom doen wij het anders. Bij Dagro Digital draait alles om één ding: resultaat. Meetbaar, concreet en direct gekoppeld aan jouw bedrijfsdoelen.",
+      "story-p3": "We geloven niet in marketing als losse schijfjes. We bouwen complete systemen waarin SEO, advertising, content en conversie-optimalisatie elkaar versterken. Waarin elke euro die je investeert traceerbaar is naar waarde.",
+      "values-label": "Onze Waarden",
+      "values-title": "Waar we voor <em>staan</em>",
+      "value-1-title": "Data-Driven",
+      "value-1-desc": "Elke beslissing is gebaseerd op data, niet op onderbuikgevoel. We meten alles en optimaliseren continu.",
+      "value-2-title": "Transparantie",
+      "value-2-desc": "Geen verborgen agenda's. Je weet precies waar je budget naartoe gaat en welke resultaten het oplevert.",
+      "value-3-title": "Resultaatgericht",
+      "value-3-desc": "We focussen op wat ertoe doet: groei, omzet, leads. Geen vanity metrics, maar echte business impact.",
+      "approach-label": "Onze Aanpak",
+      "approach-title": "Strategisch partner, niet <em>leverancier</em>",
+      "approach-p1": "We zijn geen bureau dat opdrachten uitvoert en facturen stuurt. We zijn een verlengstuk van je team dat meedenkt over strategie, kritische vragen stelt en proactief kansen signaleert.",
+      "approach-quote": "De beste marketing voelt niet als marketing. Het voelt als waarde toevoegen aan je klant.",
+      "approach-p2": "Dit betekent dat we soms nee zeggen. Als een aanpak niet past bij je doelen, zijn we eerlijk. Als je budget beter besteed kan worden, zeggen we dat. Want uiteindelijk is jouw succes ons succes.",
+      "approach-stat": "40+",
+      "approach-stat-label": "Tevreden klanten",
+      "cta-title": "Klaar om kennis te maken?",
+      "cta-description": "Plan een vrijblijvend gesprek en ontdek of we bij elkaar passen."
+    },
+    "contact": {
+      "hero-eyebrow": "Neem Contact Op",
+      "hero-title": "Laten we <em>praten</em>",
+      "hero-description": "Heb je een vraag of wil je bespreken hoe we je kunnen helpen groeien? Plan een gesprek of stuur een bericht.",
+      "info-title": "Direct contact",
+      "info-description": "Liever even bellen of mailen? Geen probleem. We reageren meestal binnen een werkdag.",
+      "faq-1-q": "Hoe snel kan ik resultaat verwachten?",
+      "faq-1-a": "Bij paid advertising zie je vaak binnen 2-4 weken de eerste resultaten. SEO is een langere termijn investering waar je na 3-6 maanden structureel resultaat begint te zien. We zijn altijd eerlijk over wat realistisch is.",
+      "faq-2-q": "Werken jullie ook met kleinere bedrijven?",
+      "faq-2-a": "Zeker. We werken met MKB-bedrijven, startups en grotere organisaties. De belangrijkste voorwaarde is groeiambitie en bereidheid om te investeren in marketing.",
+      "faq-3-q": "Wat maakt Dagro Digital anders?",
+      "faq-3-a": "We combineren strategisch denken met hands-on executie. Geen grote teams met wisselende contactpersonen, maar directe lijnen en persoonlijke betrokkenheid. Plus een obsessie voor meetbaar resultaat."
+    },
+    "diensten/seo": {
+      "hero-eyebrow": "Organische Groei",
+      "hero-title": "SEO & <em>Content</em>",
+      "hero-description": "Word structureel beter vindbaar in Google door een combinatie van technische optimalisatie, strategische contentcreatie en gerichte linkbuilding die samen zorgen voor duurzame organische groei.",
+      "section-title": "Organische groei die <em>blijft</em>",
+      "cta-title": "Klaar voor meer organisch verkeer?",
+      "cta-description": "Ontdek hoe een gerichte SEO-strategie jouw bedrijf structureel kan laten groeien. Plan een vrijblijvend gesprek waarin we je huidige situatie bespreken en laten zien waar de kansen liggen."
+    },
+    "diensten/advertorials": {
+      "hero-eyebrow": "Conversie",
+      "hero-title": "Advertorials & <em>Landingspagina's</em>",
+      "hero-description": "Conversiegerichte salespagina's die bezoekers overtuigen en omzetten in klanten. Van strategisch onderzoek en overtuigende teksten tot design en ontwikkeling, volledig afgestemd op jouw doelgroep en merk.",
+      "section-title": "Pagina's die <em>verkopen</em>",
+      "cta-title": "Klaar voor een pagina die converteert?",
+      "cta-description": "Bespreek je project en ontvang binnen 24 uur een voorstel. We kijken naar je huidige situatie en laten zien hoe we je conversie kunnen verhogen."
+    },
+    "diensten/cro": {
+      "hero-eyebrow": "Optimalisatie",
+      "hero-title": "Conversie-<em>optimalisatie</em>",
+      "hero-description": "Haal meer omzet uit je bestaande websiteverkeer. Via A/B-tests, heatmaps en verbeterde gebruikersflows zetten we psychologie en data in om je conversiepercentage structureel te verhogen.",
+      "section-title": "Meer omzet uit hetzelfde <em>verkeer</em>",
+      "cta-title": "Klaar voor hogere conversies?",
+      "cta-description": "Ontdek waar de grootste conversiekansen liggen op jouw website. We analyseren je huidige situatie en laten zien welke quick wins en langetermijn verbeteringen mogelijk zijn."
+    },
+    "diensten/online-adverteren": {
+      "hero-eyebrow": "Paid Media",
+      "hero-title": "Online <em>Adverteren</em>",
+      "hero-description": "Winstgevende campagnes op Google, Meta en andere platforms. Van doelgroep analyse en creative strategie tot dagelijkse optimalisatie, alles gericht op maximaal rendement uit je advertentiebudget.",
+      "section-title": "Performance marketing die <em>rendeert</em>",
+      "cta-title": "Klaar voor betere ROAS?",
+      "cta-description": "Ontdek hoe we jouw advertentiebudget optimaal kunnen inzetten. We analyseren je huidige campagnes en laten zien waar de verbetermogelijkheden liggen."
+    },
+    "diensten/data-analyse": {
+      "hero-eyebrow": "Inzichten",
+      "hero-title": "Data & <em>Analyse</em>",
+      "hero-description": "Maak marketingbeslissingen op basis van feiten in plaats van onderbuikgevoel. Van tracking en rapportages tot custom dashboards die helder maken welke inspanningen daadwerkelijk bijdragen aan je omzet.",
+      "section-title": "Inzicht dat <em>stuurt</em>",
+      "cta-title": "Klaar voor data-driven groei?",
+      "cta-description": "Ontdek welke inzichten je op dit moment mist en hoe betrouwbare data je kan helpen om betere marketingbeslissingen te nemen."
+    }
+  }
+}

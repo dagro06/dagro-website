@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSmoothScroll();
     initFormValidation();
-    initCursorTrail();
     initTiltCards();
     initAnimatedCounters();
     initTextReveal();
@@ -115,15 +114,24 @@ function initSmoothScroll() {
 }
 
 // ============================================
-// FORM VALIDATION
+// FORM VALIDATION & SUBMISSION
 // ============================================
 function initFormValidation() {
     const form = document.querySelector('.contact-form form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    // Check for success parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        form.style.display = 'none';
+        const successMsg = document.getElementById('form-success');
+        if (successMsg) successMsg.style.display = 'block';
+        // Clean up URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return;
+    }
 
+    form.addEventListener('submit', (e) => {
         const name = form.querySelector('input[name="name"]');
         const email = form.querySelector('input[name="email"]');
         const message = form.querySelector('textarea[name="message"]');
@@ -131,6 +139,7 @@ function initFormValidation() {
         let isValid = true;
 
         if (!name.value.trim()) {
+            e.preventDefault();
             showError(name, 'Vul je naam in');
             isValid = false;
         } else {
@@ -138,6 +147,7 @@ function initFormValidation() {
         }
 
         if (!email.value.trim() || !isValidEmail(email.value)) {
+            e.preventDefault();
             showError(email, 'Vul een geldig e-mailadres in');
             isValid = false;
         } else {
@@ -145,6 +155,7 @@ function initFormValidation() {
         }
 
         if (!message.value.trim()) {
+            e.preventDefault();
             showError(message, 'Vul een bericht in');
             isValid = false;
         } else {
@@ -152,16 +163,11 @@ function initFormValidation() {
         }
 
         if (isValid) {
+            // Show loading state
             const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>Verzonden!</span>';
+            submitBtn.innerHTML = '<span>Verzenden...</span>';
             submitBtn.disabled = true;
-
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                form.reset();
-            }, 3000);
+            // Form will submit naturally to Web3Forms
         }
     });
 }
@@ -188,75 +194,6 @@ function clearError(input) {
     input.style.borderColor = 'transparent';
     const errorEl = input.parentElement.querySelector('.error-message');
     if (errorEl) errorEl.remove();
-}
-
-// ============================================
-// CURSOR TRAIL EFFECT
-// ============================================
-function initCursorTrail() {
-    // Only on desktop
-    if (window.innerWidth < 1024) return;
-
-    const trailCount = 12;
-    const trails = [];
-    const positions = [];
-
-    // Create trail elements
-    for (let i = 0; i < trailCount; i++) {
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.cssText = `
-            position: fixed;
-            width: ${8 - i * 0.5}px;
-            height: ${8 - i * 0.5}px;
-            background: linear-gradient(135deg, #C5A572, #D4AF37);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: ${9999 - i};
-            opacity: ${0.6 - i * 0.04};
-            transition: transform 0.1s ease;
-        `;
-        document.body.appendChild(trail);
-        trails.push(trail);
-        positions.push({ x: 0, y: 0 });
-    }
-
-    let mouseX = 0, mouseY = 0;
-    let isMoving = false;
-    let timeout;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        isMoving = true;
-
-        trails.forEach(trail => trail.style.opacity = trail.dataset.opacity || '0.6');
-
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            isMoving = false;
-            trails.forEach(trail => trail.style.opacity = '0');
-        }, 150);
-    });
-
-    function animate() {
-        positions.forEach((pos, i) => {
-            const prevPos = i === 0 ? { x: mouseX, y: mouseY } : positions[i - 1];
-            const delay = 0.15;
-
-            pos.x += (prevPos.x - pos.x) * delay;
-            pos.y += (prevPos.y - pos.y) * delay;
-
-            trails[i].style.left = pos.x + 'px';
-            trails[i].style.top = pos.y + 'px';
-            trails[i].style.transform = 'translate(-50%, -50%)';
-            trails[i].dataset.opacity = (0.6 - i * 0.04).toString();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
 }
 
 // ============================================

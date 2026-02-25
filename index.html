@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QP0SHX79WL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QP0SHX79WL');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dagro Digital | Strategische Marketing Partner</title>
     <meta name="description" content="Data-driven marketing strategieën voor e-commerce merken, lokale bedrijven en marketingbureaus die serieus willen groeien.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +25,15 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Config Loader -->
+    <script src="/js/config-loader.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav-wrapper">
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <span class="logo-text">
                     Dagro
                     <span class="logo-connector">
@@ -34,11 +49,12 @@
                 <span class="logo-dot"></span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="pages/diensten.html" class="nav-link">Diensten</a>
-                <a href="pages/over-ons.html" class="nav-link">Over Ons</a>
-                <a href="pages/contact.html" class="nav-link">Contact</a>
-                <a href="pages/contact.html" class="nav-cta">Start Gesprek</a>
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/diensten" class="nav-link">Diensten</a>
+                <a href="/over-ons" class="nav-link">Over Ons</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/cases" class="nav-link">Cases</a>
+                <a href="/contact" class="nav-cta">Contact</a>
             </div>
             <button class="mobile-menu-btn" aria-label="Menu">
                 <span></span>
@@ -50,10 +66,12 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu">
-        <a href="index.html">Home</a>
-        <a href="pages/diensten.html">Diensten</a>
-        <a href="pages/over-ons.html">Over Ons</a>
-        <a href="pages/contact.html">Contact</a>
+        <a href="/">Home</a>
+        <a href="/diensten">Diensten</a>
+        <a href="/over-ons">Over Ons</a>
+        <a href="/blog">Blog</a>
+        <a href="/cases">Cases</a>
+        <a href="/contact">Contact</a>
     </div>
 
     <!-- Hero Section -->
@@ -83,29 +101,29 @@
             <div class="hero-content">
                 <div class="hero-eyebrow reveal">
                     <span class="hero-eyebrow-line"></span>
-                    <span class="hero-eyebrow-text">Strategische Marketing Partner</span>
+                    <span class="hero-eyebrow-text" data-content="hero-eyebrow">Strategische Marketing Partner</span>
                 </div>
 
-                <h1 class="hero-title reveal reveal-delay-1">
+                <h1 class="hero-title reveal reveal-delay-1" data-content="hero-title">
                     Bouw je <br><span class="highlight">groeimachine</span>
                 </h1>
 
-                <p class="hero-subtitle reveal reveal-delay-2">
-                    Waar strategie en executie samenkomen
+                <p class="hero-subtitle reveal reveal-delay-2" data-content="hero-subtitle">
+                    Voor ondernemers die klaar zijn om te schalen
                 </p>
 
-                <p class="hero-description reveal reveal-delay-3">
-                    Data-driven marketing strategieën voor e-commerce merken, lokale bedrijven en marketingbureaus die serieus willen groeien. Geen loze beloftes — alleen meetbare resultaten.
+                <p class="hero-description reveal reveal-delay-3" data-content="hero-description">
+                    Je hebt een goed product en een groeiend klantenbestand. Nu is het tijd voor een marketingsysteem dat meegroeit met je ambities. Wij bouwen de strategie, content en campagnes die structureel nieuwe klanten aantrekken en bestaande klanten langer vasthouden.
                 </p>
 
                 <div class="hero-buttons reveal reveal-delay-4">
-                    <a href="pages/diensten.html" class="btn-magnetic btn-primary">
+                    <a href="/diensten" class="btn-magnetic btn-primary">
                         <span>Ontdek onze aanpak</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
-                    <a href="pages/contact.html" class="btn-magnetic btn-outline">
+                    <a href="/contact" class="btn-magnetic btn-outline">
                         <span>Plan een gesprek</span>
                     </a>
                 </div>
@@ -124,17 +142,17 @@
         <div class="container">
             <div class="section-header center reveal">
                 <div class="section-label">
-                    <span>Onze Expertise</span>
+                    <span data-content="services-label">Onze Expertise</span>
                 </div>
-                <h2 class="section-title">Premium Marketing <em>Diensten</em></h2>
-                <p class="section-description">
-                    Van strategie tot executie. Wij bouwen complete marketingsystemen waarin alles elkaar versterkt.
+                <h2 class="section-title" data-content="services-title">Premium Marketing <em>Diensten</em></h2>
+                <p class="section-description" data-content="services-description">
+                    Van strategie tot executie bouwen wij complete marketingsystemen waarin alle onderdelen elkaar versterken en samen zorgen voor duurzame groei.
                 </p>
             </div>
 
             <div class="services-bento stagger-children">
                 <!-- SEO - Large Card -->
-                <a href="pages/diensten/seo.html" class="service-card card-dark large">
+                <a href="/diensten/seo" class="service-card card-dark large">
                     <div class="card-glow"></div>
                     <span class="service-card-number">01</span>
                     <div class="service-card-icon">
@@ -142,10 +160,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                         </svg>
                     </div>
-                    <h3>SEO & Content</h3>
-                    <p>Word zichtbaar in Google met een doordachte SEO-strategie. Van zoekwoordenonderzoek tot topicclusters en maandelijkse contentproductie die resultaat oplevert.</p>
+                    <h3 data-content="card-seo-title">SEO & Content</h3>
+                    <p data-content="card-seo-desc">Wij bouwen een topicstructuur en contentplan die ervoor zorgen dat je doelgroep je vindt wanneer ze actief op zoek zijn naar jouw oplossing.</p>
                     <span class="service-card-link">
-                        Meer ontdekken
+                        Bekijk aanpak
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -153,7 +171,7 @@
                 </a>
 
                 <!-- Advertorials - Small Card -->
-                <a href="pages/diensten/advertorials.html" class="service-card card-light small">
+                <a href="/diensten/advertorials" class="service-card card-light small">
                     <div class="card-glow"></div>
                     <span class="service-card-number">02</span>
                     <div class="service-card-icon">
@@ -161,10 +179,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/>
                         </svg>
                     </div>
-                    <h3>Advertorials</h3>
-                    <p>Conversiegerichte salespagina's binnen 14 dagen. Van strategie tot design.</p>
+                    <h3 data-content="card-advertorials-title">Advertorials</h3>
+                    <p data-content="card-advertorials-desc">Conversiegerichte landingspagina's en salespagina's die overtuigen. Gebouwd op bewezen copywriting principes en consumentenpsychologie voor maximale impact.</p>
                     <span class="service-card-link">
-                        Meer ontdekken
+                        Bekijk aanpak
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -172,7 +190,7 @@
                 </a>
 
                 <!-- CRO - Medium Card -->
-                <a href="pages/diensten/cro.html" class="service-card card-gold medium">
+                <a href="/diensten/cro" class="service-card card-gold medium">
                     <div class="card-glow"></div>
                     <span class="service-card-number">03</span>
                     <div class="service-card-icon">
@@ -180,10 +198,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
                         </svg>
                     </div>
-                    <h3>CRO</h3>
-                    <p>Maak van bezoekers klanten. Via A/B-tests, heatmaps en verbeterde gebruikersflows zetten we psychologie en data in om conversies te verhogen.</p>
+                    <h3 data-content="card-cro-title">CRO</h3>
+                    <p data-content="card-cro-desc">We analyseren waar bezoekers afhaken in je funnel en testen systematisch verbeteringen tot je conversiepercentage structureel stijgt.</p>
                     <span class="service-card-link">
-                        Meer ontdekken
+                        Bekijk aanpak
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -191,7 +209,7 @@
                 </a>
 
                 <!-- Online Advertising - Medium Card -->
-                <a href="pages/diensten/online-adverteren.html" class="service-card card-light medium">
+                <a href="/diensten/online-adverteren" class="service-card card-light medium">
                     <div class="card-glow"></div>
                     <span class="service-card-number">04</span>
                     <div class="service-card-icon">
@@ -199,10 +217,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h3>Online Adverteren</h3>
-                    <p>Slimme campagnes op Google, Meta en andere platforms. Gericht targetten, testen en continue optimalisatie voor maximaal rendement.</p>
+                    <h3 data-content="card-ads-title">Online Adverteren</h3>
+                    <p data-content="card-ads-desc">Campagnes op Google en Meta die schaalbaar én winstgevend zijn, met continue optimalisatie op basis van data.</p>
                     <span class="service-card-link">
-                        Meer ontdekken
+                        Bekijk aanpak
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -210,7 +228,7 @@
                 </a>
 
                 <!-- Data & Analytics - Medium Card -->
-                <a href="pages/diensten/data-analyse.html" class="service-card card-dark medium">
+                <a href="/diensten/data-analyse" class="service-card card-dark medium">
                     <div class="card-glow"></div>
                     <span class="service-card-number">05</span>
                     <div class="service-card-icon">
@@ -218,10 +236,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/>
                         </svg>
                     </div>
-                    <h3>Data & Analyse</h3>
-                    <p>Maak beslissingen op basis van feiten. Dashboards die laten zien wat écht werkt.</p>
+                    <h3 data-content="card-data-title">Data & Analyse</h3>
+                    <p data-content="card-data-desc">Dashboards en rapportages die helder maken welke marketing efforts daadwerkelijk bijdragen aan je omzet. Van GA4 setup tot actionable insights.</p>
                     <span class="service-card-link">
-                        Meer ontdekken
+                        Bekijk aanpak
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -237,19 +255,19 @@
             <div class="value-grid">
                 <div class="value-content reveal">
                     <div class="section-label">
-                        <span>Waarom Dagro Digital</span>
+                        <span data-content="value-label">Waarom Dagro Digital</span>
                     </div>
-                    <h2 class="section-title">Geen klassiek bureau, maar een <em>verlengstuk</em> van je bedrijf</h2>
-                    <p>We geloven niet in marketing als losse schijfjes. Dagro Digital bouwt complete marketingsystemen waarin alles elkaar versterkt.</p>
+                    <h2 class="section-title" data-content="value-title">Een verlengstuk van <em>je team</em></h2>
+                    <p data-content="value-p1">Wij geloven niet in marketing als losse projecten of campagnes die op zichzelf staan. Dagro Digital bouwt complete marketingsystemen waarin SEO, content, advertising en conversie-optimalisatie samen zorgen voor een voorspelbare stroom aan nieuwe klanten.</p>
 
                     <div class="value-quote">
-                        <blockquote>"Marketing is geen kostenpost, maar een investering in groei. Wij zorgen dat elke euro rendeert."</blockquote>
+                        <blockquote data-content="value-quote">"Marketing is een investering in groei. Wij zorgen dat elke euro rendeert."</blockquote>
                     </div>
 
-                    <p>Van strategie tot executie, van eerste bezoeker tot loyale klant. Met een data-gedreven aanpak en focus op meetbare resultaten helpen we ambitieuze ondernemers hun online aanwezigheid te transformeren.</p>
+                    <p data-content="value-p2">Van strategie tot executie, van eerste websitebezoeker tot terugkerende klant. Met een data-gedreven aanpak en focus op meetbare resultaten helpen we ambitieuze ondernemers hun online aanwezigheid structureel te verbeteren.</p>
 
                     <div style="margin-top: 40px;">
-                        <a href="pages/over-ons.html" class="btn-magnetic btn-primary" style="background: var(--primary); color: var(--white);">
+                        <a href="/over-ons" class="btn-magnetic btn-primary" style="background: var(--primary); color: var(--white);">
                             <span>Leer ons kennen</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -264,8 +282,8 @@
                             <div class="grain"></div>
                         </div>
                         <div class="value-image value-image-2">
-                            <div class="stat-large">150%</div>
-                            <div class="stat-label">Gemiddelde ROI stijging</div>
+                            <div class="stat-large" data-content="value-stat">150%</div>
+                            <div class="stat-label" data-content="value-stat-label">Gemiddelde ROI stijging</div>
                         </div>
                         <div class="floating-badge floating-badge-1">
                             <div class="badge-icon">
@@ -289,88 +307,36 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials-section section-dark">
+    <!-- Werkwijze Section -->
+    <section class="process-section section-dark">
         <div class="container">
             <div class="section-header center reveal">
                 <div class="section-label">
-                    <span>Reviews</span>
+                    <span data-content="process-label">Onze Werkwijze</span>
                 </div>
-                <h2 class="section-title">Wat onze klanten zeggen</h2>
-            </div>
-        </div>
-
-        <div class="testimonials-track">
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">Dagro Digital heeft onze online aanwezigheid volledig getransformeerd. De resultaten spreken voor zich: 200% meer leads in drie maanden tijd.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">JV</div>
-                    <div class="author-info">
-                        <h4>Johan Vermeer</h4>
-                        <span>CEO, TechStart B.V.</span>
-                    </div>
-                </div>
+                <h2 class="section-title" data-content="process-title">Van strategie naar <em>resultaat</em></h2>
             </div>
 
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">Eindelijk een bureau dat doet wat het belooft. Geen vaag marketingjargon, maar concrete acties en meetbare resultaten. Absolute aanrader!</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">LB</div>
-                    <div class="author-info">
-                        <h4>Lisa Bakker</h4>
-                        <span>Eigenaar, Bakker & Co</span>
-                    </div>
+            <div class="process-grid stagger-children">
+                <div class="process-card">
+                    <span class="process-number">01</span>
+                    <h3 data-content="process-1-title">Analyse</h3>
+                    <p data-content="process-1-desc">We beginnen met een grondige analyse van je huidige situatie, markt en concurrentie om de grootste kansen te identificeren.</p>
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">De strategische aanpak van Dagro heeft ons geholpen om gefocust te blijven op wat echt werkt. Onze ROAS is verdrievoudigd.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">MH</div>
-                    <div class="author-info">
-                        <h4>Mark Hendriks</h4>
-                        <span>Marketing Director, GrowthCo</span>
-                    </div>
+                <div class="process-card">
+                    <span class="process-number">02</span>
+                    <h3 data-content="process-2-title">Strategie</h3>
+                    <p data-content="process-2-desc">Op basis van de analyse ontwikkelen we een concreet plan met duidelijke doelen, kanalen en een realistische tijdlijn.</p>
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">Professioneel, proactief en altijd bereikbaar. Dagro denkt mee op strategisch niveau en levert kwaliteit.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SJ</div>
-                    <div class="author-info">
-                        <h4>Sandra Jansen</h4>
-                        <span>Founder, E-commerce Plus</span>
-                    </div>
+                <div class="process-card">
+                    <span class="process-number">03</span>
+                    <h3 data-content="process-3-title">Executie</h3>
+                    <p data-content="process-3-desc">Wij nemen de uitvoering volledig uit handen, van content creatie en campagne management tot technische implementaties.</p>
                 </div>
-            </div>
-
-            <!-- Duplicate for infinite scroll -->
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">Dagro Digital heeft onze online aanwezigheid volledig getransformeerd. De resultaten spreken voor zich: 200% meer leads in drie maanden tijd.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">JV</div>
-                    <div class="author-info">
-                        <h4>Johan Vermeer</h4>
-                        <span>CEO, TechStart B.V.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-quote-mark">"</div>
-                <p class="testimonial-text">Eindelijk een bureau dat doet wat het belooft. Geen vaag marketingjargon, maar concrete acties en meetbare resultaten. Absolute aanrader!</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">LB</div>
-                    <div class="author-info">
-                        <h4>Lisa Bakker</h4>
-                        <span>Eigenaar, Bakker & Co</span>
-                    </div>
+                <div class="process-card">
+                    <span class="process-number">04</span>
+                    <h3 data-content="process-4-title">Optimalisatie</h3>
+                    <p data-content="process-4-desc">Door continu te meten en te testen maken we elke maand de resultaten beter en je marketingbudget effectiever.</p>
                 </div>
             </div>
         </div>
@@ -381,10 +347,10 @@
         <div class="cta-glow"></div>
         <div class="container">
             <div class="cta-content reveal">
-                <h2 class="cta-title">Klaar om te <em>groeien</em>?</h2>
-                <p class="cta-description">Plan een strategisch gesprek en ontdek hoe we jouw marketing naar het volgende niveau tillen. Geen verplichtingen, wel concrete inzichten.</p>
+                <h2 class="cta-title" data-content="cta-title">Klaar om te <em>groeien</em>?</h2>
+                <p class="cta-description" data-content="cta-description">Plan een strategisch gesprek en ontdek hoe we jouw marketing naar het volgende niveau kunnen tillen. We bespreken je huidige situatie en laten zien waar de grootste kansen liggen.</p>
                 <div class="cta-buttons">
-                    <a href="pages/contact.html" class="btn-magnetic btn-primary">
+                    <a href="/contact" class="btn-magnetic btn-primary">
                         <span>Plan een gesprek</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -403,7 +369,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo">
+                    <a href="/" class="logo">
                         <span class="logo-text">
                             Dagro
                             <span class="logo-connector">
@@ -420,19 +386,21 @@
                 <div class="footer-column">
                     <h4>Diensten</h4>
                     <ul>
-                        <li><a href="pages/diensten/seo.html">SEO</a></li>
-                        <li><a href="pages/diensten/advertorials.html">Advertorials</a></li>
-                        <li><a href="pages/diensten/cro.html">CRO</a></li>
-                        <li><a href="pages/diensten/online-adverteren.html">Online Ads</a></li>
-                        <li><a href="pages/diensten/data-analyse.html">Data & Analyse</a></li>
+                        <li><a href="/diensten/seo">SEO</a></li>
+                        <li><a href="/diensten/advertorials">Advertorials</a></li>
+                        <li><a href="/diensten/cro">CRO</a></li>
+                        <li><a href="/diensten/online-adverteren">Online Ads</a></li>
+                        <li><a href="/diensten/data-analyse">Data & Analyse</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h4>Bedrijf</h4>
                     <ul>
-                        <li><a href="pages/over-ons.html">Over Ons</a></li>
-                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="/over-ons">Over Ons</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/cases">Cases</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
 
@@ -471,7 +439,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Dagro Digital. Alle rechten voorbehouden.</p>
                 <div class="social-links">
-                    <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/dagro06/" target="_blank" class="social-link" aria-label="LinkedIn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>

@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QP0SHX79WL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QP0SHX79WL');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoekmachineoptimalisatie (SEO) | Dagro Digital</title>
-    <meta name="description" content="Word zichtbaar in Google met een doordachte SEO-strategie. Van zoekwoordenonderzoek tot contentproductie.">
+    <title>SEO & Content | Dagro Digital</title>
+    <meta name="description" content="Word structureel beter vindbaar in Google met een doordachte SEO-strategie. Van zoekwoordenonderzoek tot contentproductie die resultaat oplevert.">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="/js/config-loader.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav-wrapper">
         <div class="nav-container">
-            <a href="../../index.html" class="logo">
+            <a href="/" class="logo">
                 <span class="logo-text">Dagro<span class="logo-connector"><span class="logo-connector-line"></span><span class="logo-connector-arrow"></span></span>Digital</span>
                 <span class="logo-dot"></span>
             </a>
             <div class="nav-links">
-                <a href="../../index.html" class="nav-link">Home</a>
-                <a href="../diensten.html" class="nav-link active">Diensten</a>
-                <a href="../over-ons.html" class="nav-link">Over Ons</a>
-                <a href="../contact.html" class="nav-link">Contact</a>
-                <a href="../contact.html" class="nav-cta">Start Gesprek</a>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/diensten" class="nav-link active">Diensten</a>
+                <a href="/over-ons" class="nav-link">Over Ons</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/cases" class="nav-link">Cases</a>
+                <a href="/contact" class="nav-cta">Contact</a>
             </div>
             <button class="mobile-menu-btn" aria-label="Menu">
                 <span></span>
@@ -36,13 +48,14 @@
     </nav>
 
     <div class="mobile-menu">
-        <a href="../../index.html">Home</a>
-        <a href="../diensten.html">Diensten</a>
-        <a href="../over-ons.html">Over Ons</a>
-        <a href="../contact.html">Contact</a>
+        <a href="/">Home</a>
+        <a href="/diensten">Diensten</a>
+        <a href="/over-ons">Over Ons</a>
+        <a href="/blog">Blog</a>
+        <a href="/cases">Cases</a>
+        <a href="/contact">Contact</a>
     </div>
 
-    <!-- Hero -->
     <section class="hero hero-page service-hero">
         <div class="hero-grid"></div>
         <div class="hero-orb hero-orb-1"></div>
@@ -53,16 +66,16 @@
             <div class="hero-content">
                 <div class="hero-eyebrow reveal">
                     <span class="hero-eyebrow-line"></span>
-                    <span class="hero-eyebrow-text">Dienst 01</span>
+                    <span class="hero-eyebrow-text" data-content="hero-eyebrow">Organische Groei</span>
                 </div>
-                <h1 class="hero-title reveal reveal-delay-1">
-                    Zoekmachine<em>optimalisatie</em>
+                <h1 class="hero-title reveal reveal-delay-1" data-content="hero-title">
+                    SEO & <em>Content</em>
                 </h1>
-                <p class="hero-description reveal reveal-delay-2">
-                    Word zichtbaar in Google met een doordachte SEO-strategie. Structurele organische groei die blijft renderen.
+                <p class="hero-description reveal reveal-delay-2" data-content="hero-description">
+                    Word structureel beter vindbaar in Google door een combinatie van technische optimalisatie, strategische contentcreatie en gerichte linkbuilding die samen zorgen voor duurzame organische groei.
                 </p>
                 <div class="hero-buttons reveal reveal-delay-3">
-                    <a href="../contact.html" class="btn-magnetic btn-primary">
+                    <a href="/contact" class="btn-magnetic btn-primary">
                         <span>Start met SEO</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -73,17 +86,16 @@
         </div>
     </section>
 
-    <!-- Service Content -->
     <section class="service-content section-light">
         <div class="container">
             <div class="service-intro">
                 <div class="service-intro-text reveal">
-                    <h2>Organische groei die <em>blijft</em></h2>
-                    <p>SEO is geen eenmalige actie, maar een doorlopende investering in je online vindbaarheid. Wij bouwen een fundament dat jaar na jaar meer verkeer en leads genereert.</p>
-                    <p>Van technische optimalisatie tot content strategie — we dekken alle aspecten die nodig zijn om hoog te scoren in Google. Geen black-hat technieken, maar duurzame groei.</p>
+                    <h2 data-content="section-title">Organische groei die <em>blijft</em></h2>
+                    <p>SEO is geen eenmalige actie maar een doorlopende investering in je online vindbaarheid. Wanneer je investeert in betaalde advertenties stopt het verkeer zodra je stopt met betalen, maar met SEO bouw je een fundament dat jaar na jaar meer bezoekers en leads genereert zonder dat je daar steeds opnieuw voor hoeft te betalen.</p>
+                    <p>Onze aanpak combineert technische optimalisatie met strategische contentcreatie. We beginnen met een grondige audit om te begrijpen waar de kansen liggen, voeren zoekwoordenonderzoek uit om te bepalen waar je doelgroep naar zoekt, en bouwen vervolgens een contentplan dat je positioneert als autoriteit binnen jouw vakgebied.</p>
 
-                    <h3 style="margin-top: 48px; font-size: 24px;">Wat we doen</h3>
-                    <p>Onze SEO-aanpak is gebaseerd op drie pijlers: techniek, content en autoriteit. We beginnen met een grondige audit om te begrijpen waar de kansen liggen, bouwen vervolgens een strategie op basis van zoekwoordenonderzoek, en voeren deze uit met hoogwaardige content.</p>
+                    <h3 style="margin-top: 48px; font-size: 24px;">Hoe wij te werk gaan</h3>
+                    <p>We starten altijd met een technische audit waarbij we kijken naar de gezondheid van je website, laadsnelheden, mobiele weergave en indexeerbaarheid. Vervolgens duiken we in je markt om te begrijpen welke zoektermen je doelgroep gebruikt en waar de beste kansen liggen om te ranken. Op basis hiervan bouwen we topicclusters die Google helpen begrijpen dat jij de expert bent binnen jouw niche, en produceren we maandelijks nieuwe content die bezoekers aantrekt en converteert.</p>
                 </div>
 
                 <div class="service-sidebar reveal reveal-delay-2">
@@ -99,11 +111,11 @@
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Content strategie & productie
+                            Content strategie en productie
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Topicclusters & pillar pages
+                            Topicclusters en pillar pages
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -117,7 +129,6 @@
                 </div>
             </div>
 
-            <!-- Process -->
             <div class="process-section">
                 <div class="section-header center reveal">
                     <div class="section-label"><span>Werkwijze</span></div>
@@ -127,44 +138,43 @@
                 <div class="process-grid stagger-children">
                     <div class="process-step">
                         <div class="process-number">1</div>
-                        <h4>Audit & Analyse</h4>
-                        <p>Grondige technische audit en concurrentieanalyse om kansen te identificeren.</p>
+                        <h4>Audit en analyse</h4>
+                        <p>We beginnen met een grondige technische audit en concurrentieanalyse om de beste kansen te identificeren.</p>
                     </div>
                     <div class="process-step">
                         <div class="process-number">2</div>
-                        <h4>Keyword Research</h4>
-                        <p>Zoekwoordenonderzoek gericht op zoekintentie en commerciële waarde.</p>
+                        <h4>Keyword research</h4>
+                        <p>Uitgebreid zoekwoordenonderzoek gericht op zoekintentie en commerciële waarde voor jouw business.</p>
                     </div>
                     <div class="process-step">
                         <div class="process-number">3</div>
-                        <h4>Content Creatie</h4>
-                        <p>SEO-geoptimaliseerde content die rankt én converteert.</p>
+                        <h4>Content creatie</h4>
+                        <p>SEO-geoptimaliseerde content die niet alleen rankt in Google maar ook je bezoekers overtuigt en converteert.</p>
                     </div>
                     <div class="process-step">
                         <div class="process-number">4</div>
-                        <h4>Monitor & Optimaliseer</h4>
-                        <p>Continue monitoring en bijsturing voor maximaal resultaat.</p>
+                        <h4>Monitor en optimaliseer</h4>
+                        <p>Continue monitoring van rankings en verkeer, met maandelijkse bijsturing voor maximaal resultaat.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta-section section-dark">
         <div class="cta-glow"></div>
         <div class="container">
             <div class="cta-content reveal">
-                <h2 class="cta-title">Klaar voor meer <em>organisch verkeer</em>?</h2>
-                <p class="cta-description">Ontdek hoe SEO jouw bedrijf kan laten groeien. Plan een vrijblijvend gesprek.</p>
+                <h2 class="cta-title" data-content="cta-title">Klaar voor meer <em>organisch verkeer</em>?</h2>
+                <p class="cta-description" data-content="cta-description">Ontdek hoe een gerichte SEO-strategie jouw bedrijf structureel kan laten groeien. Plan een vrijblijvend gesprek waarin we je huidige situatie bespreken en laten zien waar de kansen liggen.</p>
                 <div class="cta-buttons">
-                    <a href="../contact.html" class="btn-magnetic btn-primary">
+                    <a href="/contact" class="btn-magnetic btn-primary">
                         <span>Plan een gesprek</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
-                    <a href="../diensten.html" class="btn-magnetic btn-outline">
+                    <a href="/diensten" class="btn-magnetic btn-outline">
                         <span>Alle diensten</span>
                     </a>
                 </div>
@@ -172,12 +182,11 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="../../index.html" class="logo">
+                    <a href="/" class="logo">
                         <span class="logo-text">Dagro<span class="logo-connector"><span class="logo-connector-line"></span><span class="logo-connector-arrow"></span></span>Digital</span>
                         <span class="logo-dot"></span>
                     </a>
@@ -186,18 +195,20 @@
                 <div class="footer-column">
                     <h4>Diensten</h4>
                     <ul>
-                        <li><a href="seo.html">SEO</a></li>
-                        <li><a href="advertorials.html">Advertorials</a></li>
-                        <li><a href="cro.html">CRO</a></li>
-                        <li><a href="online-adverteren.html">Online Ads</a></li>
-                        <li><a href="data-analyse.html">Data & Analyse</a></li>
+                        <li><a href="/diensten/seo">SEO</a></li>
+                        <li><a href="/diensten/advertorials">Advertorials</a></li>
+                        <li><a href="/diensten/cro">CRO</a></li>
+                        <li><a href="/diensten/online-adverteren">Online Ads</a></li>
+                        <li><a href="/diensten/data-analyse">Data & Analyse</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Bedrijf</h4>
                     <ul>
-                        <li><a href="../over-ons.html">Over Ons</a></li>
-                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="/over-ons">Over Ons</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/cases">Cases</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column footer-contact">
@@ -214,6 +225,6 @@
         </div>
     </footer>
 
-    <script src="../../js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

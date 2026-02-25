@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Dagro Digital</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --admin-bg: #0a0a0a;
+            --admin-surface: #141414;
+            --admin-surface2: #1e1e1e;
+            --admin-border: #2a2a2a;
+            --admin-text: #e5e5e5;
+            --admin-text-muted: #888;
+            --admin-accent: #C5A572;
+            --admin-accent-hover: #D4AF37;
+            --admin-green: #16552F;
+            --admin-green-light: #1E6B3D;
+            --admin-danger: #ef4444;
+        }
+        body {
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-box {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            padding: 48px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .login-box h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .login-box p {
+            color: var(--admin-text-muted);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--admin-bg);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            color: var(--admin-text);
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 16px;
+        }
+        .login-box input:focus {
+            outline: none;
+            border-color: var(--admin-accent);
+        }
+        .login-error {
+            color: var(--admin-danger);
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        /* Admin Layout */
+        .admin-layout { display: none; }
+        .admin-layout.active { display: flex; min-height: 100vh; }
+        .admin-sidebar {
+            width: 240px;
+            background: var(--admin-surface);
+            border-right: 1px solid var(--admin-border);
+            padding: 24px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        .admin-logo {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid var(--admin-border);
+            margin-bottom: 16px;
+        }
+        .admin-logo h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--admin-accent);
+        }
+        .admin-logo span {
+            font-size: 12px;
+            color: var(--admin-text-muted);
+        }
+        .sidebar-nav { list-style: none; }
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            color: var(--admin-text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            color: var(--admin-text);
+            background: var(--admin-surface2);
+        }
+        .sidebar-nav li a.active {
+            border-right: 2px solid var(--admin-accent);
+            color: var(--admin-accent);
+        }
+        .sidebar-nav li a svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .sidebar-section {
+            padding: 16px 24px 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--admin-text-muted);
+        }
+
+        .admin-main {
+            margin-left: 240px;
+            flex: 1;
+            padding: 32px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .admin-header h1 { font-size: 28px; font-weight: 600; }
+        .admin-header .save-status {
+            font-size: 13px;
+            color: var(--admin-text-muted);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--admin-accent);
+            color: #000;
+        }
+        .btn-primary:hover { background: var(--admin-accent-hover); }
+        .btn-secondary {
+            background: var(--admin-surface2);
+            color: var(--admin-text);
+            border: 1px solid var(--admin-border);
+        }
+        .btn-secondary:hover { border-color: var(--admin-accent); }
+        .btn-danger {
+            background: transparent;
+            color: var(--admin-danger);
+            border: 1px solid var(--admin-danger);
+        }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+
+        /* Panels */
+        .panel {
+            display: none;
+        }
+        .panel.active { display: block; }
+
+        /* Cards */
+        .card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--admin-accent);
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--admin-text-muted);
+            margin-bottom: 6px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="url"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--admin-bg);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            color: var(--admin-text);
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--admin-accent);
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-group .char-count {
+            font-size: 12px;
+            color: var(--admin-text-muted);
+            margin-top: 4px;
+            text-align: right;
+        }
+        .form-group .char-count.over {
+            color: var(--admin-danger);
+        }
+
+        /* Color Picker */
+        .color-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .color-input input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--admin-border);
+            border-radius: 8px;
+            padding: 2px;
+            cursor: pointer;
+            background: transparent;
+        }
+        .color-input input[type="text"] {
+            flex: 1;
+        }
+        .color-label { font-size: 12px; color: var(--admin-text-muted); }
+
+        /* Font Size Slider */
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .slider-group input[type="range"] {
+            flex: 1;
+            accent-color: var(--admin-accent);
+        }
+        .slider-value {
+            font-size: 13px;
+            color: var(--admin-accent);
+            min-width: 60px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Page Selector */
+        .page-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .page-selector .page-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            background: var(--admin-surface2);
+            border: 1px solid var(--admin-border);
+            color: var(--admin-text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-selector .page-btn:hover { border-color: var(--admin-accent); color: var(--admin-text); }
+        .page-selector .page-btn.active {
+            background: var(--admin-accent);
+            color: #000;
+            border-color: var(--admin-accent);
+        }
+
+        /* Setup section */
+        .setup-card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        .setup-card h3 { margin-bottom: 12px; color: var(--admin-accent); }
+        .setup-card p { color: var(--admin-text-muted); font-size: 14px; margin-bottom: 16px; line-height: 1.6; }
+        .setup-card code {
+            background: var(--admin-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--admin-accent);
+        }
+        .setup-steps { list-style: decimal; padding-left: 20px; }
+        .setup-steps li { color: var(--admin-text-muted); font-size: 14px; margin-bottom: 8px; line-height: 1.6; }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 14px 24px;
+            background: var(--admin-green);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.error { background: var(--admin-danger); }
+
+        /* Publish bar */
+        .publish-bar {
+            position: fixed;
+            bottom: 0;
+            left: 240px;
+            right: 0;
+            padding: 16px 32px;
+            background: var(--admin-surface);
+            border-top: 1px solid var(--admin-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .publish-bar .status { font-size: 13px; color: var(--admin-text-muted); }
+        .publish-bar .actions { display: flex; gap: 12px; }
+
+        /* Blog/Cases list */
+        .notion-list { margin-top: 16px; }
+        .notion-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--admin-surface2);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .notion-item-title { font-weight: 500; }
+        .notion-item-meta { font-size: 13px; color: var(--admin-text-muted); }
+        .notion-item-status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: var(--admin-surface);
+        }
+        .notion-item-status.published { color: var(--admin-green-light); border: 1px solid var(--admin-green-light); }
+        .notion-item-status.ready { color: var(--admin-accent); border: 1px solid var(--admin-accent); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-sidebar { display: none; }
+            .admin-main { margin-left: 0; }
+            .publish-bar { left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <h1>Dagro Digital</h1>
+        <p>Admin Panel</p>
+        <div class="login-error" id="loginError">Onjuist wachtwoord</div>
+        <input type="password" id="loginPassword" placeholder="Wachtwoord" autofocus>
+        <button class="btn btn-primary" style="width: 100%;" onclick="handleLogin()">Inloggen</button>
+    </div>
+</div>
+
+<!-- Admin Layout -->
+<div class="admin-layout" id="adminLayout">
+    <aside class="admin-sidebar">
+        <div class="admin-logo">
+            <h2>Dagro Digital</h2>
+            <span>Admin Panel</span>
+        </div>
+        <div class="sidebar-section">Website</div>
+        <ul class="sidebar-nav">
+            <li><a onclick="showPanel('design')" class="active" data-panel="design">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"/></svg>
+                Design
+            </a></li>
+            <li><a onclick="showPanel('content')" data-panel="content">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                Content
+            </a></li>
+            <li><a onclick="showPanel('seo')" data-panel="seo">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                SEO & Meta
+            </a></li>
+        </ul>
+        <div class="sidebar-section">Notion CMS</div>
+        <ul class="sidebar-nav">
+            <li><a onclick="showPanel('blog')" data-panel="blog">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>
+                Blog
+            </a></li>
+            <li><a onclick="showPanel('cases')" data-panel="cases">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                Casestudies
+            </a></li>
+        </ul>
+        <div class="sidebar-section">Instellingen</div>
+        <ul class="sidebar-nav">
+            <li><a onclick="showPanel('setup')" data-panel="setup">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Setup
+            </a></li>
+        </ul>
+    </aside>
+
+    <main class="admin-main">
+
+        <!-- DESIGN PANEL -->
+        <div class="panel active" id="panel-design">
+            <div class="admin-header">
+                <h1>Design</h1>
+            </div>
+
+            <div class="card">
+                <h3>Kleuren</h3>
+                <div class="card-grid" id="colorInputs"></div>
+            </div>
+
+            <div class="card">
+                <h3>Lettertypen</h3>
+                <div id="fontInputs"></div>
+            </div>
+
+            <div class="card">
+                <h3>Lettergroottes</h3>
+                <div id="fontSizeInputs"></div>
+            </div>
+        </div>
+
+        <!-- CONTENT PANEL -->
+        <div class="panel" id="panel-content">
+            <div class="admin-header">
+                <h1>Content</h1>
+            </div>
+            <div class="page-selector" id="contentPageSelector"></div>
+            <div id="contentFields"></div>
+        </div>
+
+        <!-- SEO PANEL -->
+        <div class="panel" id="panel-seo">
+            <div class="admin-header">
+                <h1>SEO & Meta</h1>
+            </div>
+            <div class="page-selector" id="seoPageSelector"></div>
+            <div id="seoFields"></div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h3>Favicon</h3>
+                <div class="form-group">
+                    <label>Huidig favicon</label>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                        <div id="faviconPreview" style="width: 48px; height: 48px; background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                            <img id="faviconPreviewImg" src="/favicon.svg" style="max-width: 40px; max-height: 40px; object-fit: contain;" onerror="this.style.display='none'">
+                        </div>
+                        <span id="faviconFilename" style="color: var(--admin-muted); font-size: 14px;">/favicon.svg</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nieuw favicon uploaden</label>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <label for="faviconFile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 8px; cursor: pointer; color: var(--admin-text); font-size: 14px; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--admin-gold)'" onmouseout="this.style.borderColor='var(--admin-border)'">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Kies bestand
+                        </label>
+                        <input type="file" id="faviconFile" accept=".svg,.png,.ico,.jpg,.jpeg,.webp" style="display: none;" onchange="handleFaviconUpload(this)">
+                        <span id="faviconUploadStatus" style="color: var(--admin-muted); font-size: 13px;">SVG, PNG, ICO of JPG</span>
+                    </div>
+                </div>
+                <input type="hidden" id="faviconInput" value="/favicon.svg">
+            </div>
+        </div>
+
+        <!-- BLOG PANEL -->
+        <div class="panel" id="panel-blog">
+            <div class="admin-header">
+                <h1>Blog</h1>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary btn-sm" onclick="fetchNotionBlog()">
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="vertical-align: -2px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Ophalen uit Notion
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="publishAllBlog()" id="publishAllBlogBtn" style="display:none;">Alles publiceren</button>
+                </div>
+            </div>
+            <div class="card">
+                <p style="color: var(--admin-muted); font-size: 14px; margin-bottom: 16px;">Schrijf je posts in Notion en publiceer ze hier naar de website.</p>
+                <div id="blogList">
+                    <p style="color: var(--admin-muted); font-size: 13px;">Klik op "Ophalen uit Notion" om je blogposts te laden.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CASES PANEL -->
+        <div class="panel" id="panel-cases">
+            <div class="admin-header">
+                <h1>Casestudies</h1>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary btn-sm" onclick="fetchNotionCases()">
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="vertical-align: -2px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Ophalen uit Notion
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="publishAllCases()" id="publishAllCasesBtn" style="display:none;">Alles publiceren</button>
+                </div>
+            </div>
+            <div class="card">
+                <p style="color: var(--admin-muted); font-size: 14px; margin-bottom: 16px;">Schrijf je casestudies in Notion en publiceer ze hier naar de website.</p>
+                <div id="casesList">
+                    <p style="color: var(--admin-muted); font-size: 13px;">Klik op "Ophalen uit Notion" om je cases te laden.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT PREVIEW MODAL -->
+        <div id="previewModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); overflow-y:auto;">
+            <div style="max-width: 800px; margin: 40px auto; background: var(--admin-card); border-radius: 16px; padding: 40px; position: relative;">
+                <button onclick="closePreview()" style="position:absolute; top:16px; right:16px; background:none; border:none; color:var(--admin-muted); cursor:pointer; font-size:24px;">&times;</button>
+                <div id="previewContent"></div>
+            </div>
+        </div>
+
+        <!-- SETUP PANEL -->
+        <div class="panel" id="panel-setup">
+            <div class="admin-header">
+                <h1>Setup</h1>
+            </div>
+
+            <div class="setup-card">
+                <h3>1. GitHub Personal Access Token</h3>
+                <p>Nodig om wijzigingen op te slaan. Maak een token aan op <a href="https://github.com/settings/tokens/new" target="_blank" style="color: var(--admin-accent);">github.com/settings/tokens</a>.</p>
+                <div class="setup-steps">
+                    <li>Ga naar GitHub Settings → Developer Settings → Personal Access Tokens → Fine-grained tokens</li>
+                    <li>Klik "Generate new token"</li>
+                    <li>Geef het een naam (bv. "Dagro Admin")</li>
+                    <li>Selecteer alleen de repository <code>dagro-website</code></li>
+                    <li>Onder "Repository permissions", zet Contents op <strong>Read and write</strong></li>
+                    <li>Klik "Generate token" en plak het hieronder</li>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                    <label>GitHub Token</label>
+                    <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                    <button class="btn btn-secondary btn-sm" style="margin-top: 8px;" onclick="saveSetup()">Opslaan</button>
+                </div>
+            </div>
+
+            <div class="setup-card">
+                <h3>2. GitHub Repository</h3>
+                <div class="form-group">
+                    <label>Repository (owner/name)</label>
+                    <input type="text" id="githubRepo" placeholder="dagro06/dagro-website" value="dagro06/dagro-website">
+                </div>
+            </div>
+
+            <div class="setup-card">
+                <h3>3. Notion Integratie (voor Blog & Cases)</h3>
+                <p>De Notion API key kan op twee manieren worden ingesteld:</p>
+                <div class="setup-steps">
+                    <li><strong>Optie A (aanbevolen):</strong> Stel <code>NOTION_API_KEY</code> in als environment variable in je <a href="https://vercel.com" target="_blank" style="color: var(--admin-accent);">Vercel Dashboard</a> → Settings → Environment Variables</li>
+                    <li><strong>Optie B:</strong> Vul de API key hieronder in (wordt dan via de browser meegestuurd)</li>
+                </div>
+                <p style="margin-top:12px;">Deel je Notion databases met de integratie via het "..." menu → Connections.</p>
+                <div class="form-group">
+                    <label>Notion API Key</label>
+                    <input type="password" id="notionKey" placeholder="ntn_xxxxxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>Blog Database ID</label>
+                    <input type="text" id="notionBlogDb" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>Casestudies Database ID</label>
+                    <input type="text" id="notionCasesDb" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="saveSetup()">Opslaan</button>
+            </div>
+
+            <div class="setup-card">
+                <h3>Wachtwoord wijzigen</h3>
+                <div class="form-group">
+                    <label>Nieuw wachtwoord</label>
+                    <input type="password" id="newPassword" placeholder="Nieuw wachtwoord">
+                    <button class="btn btn-secondary btn-sm" style="margin-top: 8px;" onclick="changePassword()">Wijzig wachtwoord</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Publish Bar -->
+<div class="publish-bar" id="publishBar" style="display: none;">
+    <div class="status" id="publishStatus">Onopgeslagen wijzigingen</div>
+    <div class="actions">
+        <button class="btn btn-secondary btn-sm" onclick="resetChanges()">Reset</button>
+        <button class="btn btn-primary" onclick="publishChanges()" id="publishBtn">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            Publiceren
+        </button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================
+// STATE
+// ============================================
+var config = null;
+var originalConfig = null;
+var hasChanges = false;
+
+var COLOR_LABELS = {
+    '--primary': 'Primair (donkergroen)',
+    '--primary-light': 'Primair licht',
+    '--primary-dark': 'Primair donker',
+    '--gold': 'Goud',
+    '--gold-bright': 'Goud helder',
+    '--off-white': 'Off-white',
+    '--text-dark': 'Tekst donker',
+    '--text-gray': 'Tekst grijs'
+};
+
+var FONT_OPTIONS = [
+    "'Playfair Display', Georgia, serif",
+    "'Outfit', -apple-system, sans-serif",
+    "'Cormorant Garamond', Georgia, serif",
+    "'Inter', -apple-system, sans-serif",
+    "'DM Sans', -apple-system, sans-serif",
+    "'Lora', Georgia, serif",
+    "'Merriweather', Georgia, serif",
+    "'Poppins', -apple-system, sans-serif",
+    "'Raleway', -apple-system, sans-serif",
+    "'Roboto Slab', Georgia, serif"
+];
+
+var FONT_LABELS = {
+    '--font-display': 'Headings',
+    '--font-body': 'Body tekst',
+    '--font-accent': 'Accenten'
+};
+
+var PAGE_NAMES = {
+    'index': 'Home',
+    'diensten': 'Diensten',
+    'over-ons': 'Over Ons',
+    'contact': 'Contact',
+    'diensten/seo': 'SEO',
+    'diensten/advertorials': 'Advertorials',
+    'diensten/cro': 'CRO',
+    'diensten/online-adverteren': 'Online Adverteren',
+    'diensten/data-analyse': 'Data & Analyse'
+};
+
+var CONTENT_LABELS = {
+    'hero-eyebrow': 'Hero label',
+    'hero-title': 'Hero titel (HTML)',
+    'hero-subtitle': 'Hero subtitel',
+    'hero-description': 'Hero beschrijving',
+    'services-label': 'Diensten label',
+    'services-title': 'Diensten titel (HTML)',
+    'services-description': 'Diensten beschrijving',
+    'section-title': 'Sectie titel (HTML)',
+    'cta-title': 'CTA titel',
+    'cta-description': 'CTA beschrijving',
+    'value-label': 'Waarde label',
+    'value-title': 'Waarde titel (HTML)',
+    'value-p1': 'Waarde paragraaf 1',
+    'value-p2': 'Waarde paragraaf 2',
+    'value-quote': 'Quote',
+    'value-stat': 'Statistiek',
+    'value-stat-label': 'Statistiek label',
+    'process-label': 'Proces label',
+    'process-title': 'Proces titel (HTML)',
+    'story-label': 'Verhaal label',
+    'story-title': 'Verhaal titel (HTML)',
+    'story-stat': 'Statistiek',
+    'story-stat-label': 'Statistiek label',
+    'story-p1': 'Verhaal paragraaf 1',
+    'story-p2': 'Verhaal paragraaf 2',
+    'story-p3': 'Verhaal paragraaf 3',
+    'values-label': 'Waarden label',
+    'values-title': 'Waarden titel (HTML)',
+    'approach-label': 'Aanpak label',
+    'approach-title': 'Aanpak titel (HTML)',
+    'approach-p1': 'Aanpak paragraaf 1',
+    'approach-p2': 'Aanpak paragraaf 2',
+    'approach-quote': 'Aanpak quote',
+    'approach-stat': 'Aanpak statistiek',
+    'approach-stat-label': 'Aanpak statistiek label',
+    'info-title': 'Contact info titel',
+    'info-description': 'Contact info beschrijving',
+    'footer-description': 'Footer beschrijving',
+    'footer-email': 'Footer email',
+    'footer-phone': 'Footer telefoon',
+    'footer-location': 'Footer locatie'
+};
+
+// ============================================
+// LOGIN
+// ============================================
+var PASS_KEY = 'dagro-admin-pass';
+var SESSION_KEY = 'dagro-admin-session';
+
+function handleLogin() {
+    var pass = document.getElementById('loginPassword').value;
+    var stored = localStorage.getItem(PASS_KEY);
+    if (!stored) {
+        // First time: set password
+        localStorage.setItem(PASS_KEY, btoa(pass));
+        enterAdmin();
+    } else if (btoa(pass) === stored) {
+        enterAdmin();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
+
+document.getElementById('loginPassword').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleLogin();
+});
+
+function enterAdmin() {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminLayout').classList.add('active');
+    loadConfig();
+    loadSetup();
+}
+
+function changePassword() {
+    var np = document.getElementById('newPassword').value;
+    if (np.length < 4) return toast('Wachtwoord te kort', true);
+    localStorage.setItem(PASS_KEY, btoa(np));
+    toast('Wachtwoord gewijzigd');
+}
+
+// Auto-login if session exists
+if (sessionStorage.getItem(SESSION_KEY)) {
+    enterAdmin();
+}
+
+// ============================================
+// CONFIG LOADING
+// ============================================
+function loadConfig() {
+    fetch('/site-config.json?t=' + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(c) {
+            config = c;
+            originalConfig = JSON.parse(JSON.stringify(c));
+            renderDesign();
+            renderContent('index');
+            renderSeo('index');
+            if (config.favicon) {
+                document.getElementById('faviconInput').value = config.favicon;
+                document.getElementById('faviconFilename').textContent = config.favicon;
+                document.getElementById('faviconPreviewImg').src = config.favicon + '?t=' + Date.now();
+            }
+        })
+        .catch(function() {
+            toast('Kon config niet laden', true);
+        });
+}
+
+// ============================================
+// RENDER DESIGN PANEL
+// ============================================
+function renderDesign() {
+    // Colors
+    var colorHtml = '';
+    Object.keys(config.design.colors).forEach(function(prop) {
+        var val = config.design.colors[prop];
+        var label = COLOR_LABELS[prop] || prop;
+        colorHtml += '<div class="form-group">' +
+            '<label>' + label + '</label>' +
+            '<div class="color-input">' +
+            '<input type="color" value="' + val + '" onchange="updateColor(\'' + prop + '\', this.value)">' +
+            '<input type="text" value="' + val + '" onchange="updateColor(\'' + prop + '\', this.value)" data-color="' + prop + '">' +
+            '</div></div>';
+    });
+    document.getElementById('colorInputs').innerHTML = colorHtml;
+
+    // Fonts
+    var fontHtml = '';
+    Object.keys(config.design.fonts).forEach(function(prop) {
+        var val = config.design.fonts[prop];
+        var label = FONT_LABELS[prop] || prop;
+        fontHtml += '<div class="form-group">' +
+            '<label>' + label + '</label>' +
+            '<select onchange="updateFont(\'' + prop + '\', this.value)">';
+        FONT_OPTIONS.forEach(function(opt) {
+            fontHtml += '<option value="' + opt + '"' + (opt === val ? ' selected' : '') + '>' + opt.split("'")[1] + '</option>';
+        });
+        fontHtml += '</select></div>';
+    });
+    document.getElementById('fontInputs').innerHTML = fontHtml;
+
+    // Font sizes
+    var fsHtml = '';
+    Object.keys(config.design.fontSizes).forEach(function(tag) {
+        var val = config.design.fontSizes[tag];
+        // Extract the max value from clamp for the slider
+        var match = val.match(/clamp\((\d+)px/);
+        var min = match ? parseInt(match[1]) : 16;
+        fsHtml += '<div class="form-group">' +
+            '<label>' + tag.toUpperCase() + '</label>' +
+            '<div class="slider-group">' +
+            '<span class="slider-value">' + min + 'px</span>' +
+            '<input type="range" min="12" max="80" value="' + min + '" oninput="updateFontSize(\'' + tag + '\', this.value, this)">' +
+            '</div>' +
+            '<div class="color-label">Huidig: ' + val + '</div>' +
+            '</div>';
+    });
+    document.getElementById('fontSizeInputs').innerHTML = fsHtml;
+}
+
+function updateColor(prop, val) {
+    config.design.colors[prop] = val;
+    // Sync both inputs
+    var textInput = document.querySelector('[data-color="' + prop + '"]');
+    if (textInput) textInput.value = val;
+    markChanged();
+}
+
+function updateFont(prop, val) {
+    config.design.fonts[prop] = val;
+    markChanged();
+}
+
+function updateFontSize(tag, px, input) {
+    config.design.fontSizes[tag] = 'clamp(' + px + 'px, ' + (tag === 'body' ? '1.2vw' : Math.round(px/8) + 'vw') + ', ' + Math.round(px * 2.5) + 'px)';
+    input.previousElementSibling.textContent = px + 'px';
+    markChanged();
+}
+
+// ============================================
+// RENDER CONTENT PANEL
+// ============================================
+function renderContent(pageKey) {
+    // Page selector
+    var selectorHtml = '';
+    Object.keys(PAGE_NAMES).forEach(function(key) {
+        selectorHtml += '<button class="page-btn' + (key === pageKey ? ' active' : '') + '" onclick="renderContent(\'' + key + '\')">' + PAGE_NAMES[key] + '</button>';
+    });
+    document.getElementById('contentPageSelector').innerHTML = selectorHtml;
+
+    // Content fields
+    var pageContent = config.content[pageKey] || {};
+    var fieldsHtml = '<div class="card"><h3>' + PAGE_NAMES[pageKey] + '</h3>';
+
+    Object.keys(pageContent).forEach(function(key) {
+        var label = CONTENT_LABELS[key] || key;
+        var val = pageContent[key];
+        var isLong = val.length > 100;
+        fieldsHtml += '<div class="form-group">' +
+            '<label>' + label + ' <span style="opacity:0.5">(' + key + ')</span></label>';
+        if (isLong) {
+            fieldsHtml += '<textarea rows="3" oninput="updateContent(\'' + pageKey + '\', \'' + key + '\', this.value)">' + escapeHtml(val) + '</textarea>';
+        } else {
+            fieldsHtml += '<input type="text" value="' + escapeAttr(val) + '" oninput="updateContent(\'' + pageKey + '\', \'' + key + '\', this.value)">';
+        }
+        fieldsHtml += '</div>';
+    });
+
+    fieldsHtml += '</div>';
+    document.getElementById('contentFields').innerHTML = fieldsHtml;
+}
+
+function updateContent(page, key, val) {
+    if (!config.content[page]) config.content[page] = {};
+    config.content[page][key] = val;
+    markChanged();
+}
+
+// ============================================
+// RENDER SEO PANEL
+// ============================================
+function renderSeo(pageKey) {
+    var selectorHtml = '';
+    Object.keys(PAGE_NAMES).forEach(function(key) {
+        selectorHtml += '<button class="page-btn' + (key === pageKey ? ' active' : '') + '" onclick="renderSeo(\'' + key + '\')">' + PAGE_NAMES[key] + '</button>';
+    });
+    document.getElementById('seoPageSelector').innerHTML = selectorHtml;
+
+    var meta = config.meta[pageKey] || {};
+    var titleLen = (meta.title || '').length;
+    var descLen = (meta.description || '').length;
+
+    var html = '<div class="card"><h3>' + PAGE_NAMES[pageKey] + ' - Meta Tags</h3>' +
+        '<div class="form-group">' +
+        '<label>Meta Title</label>' +
+        '<input type="text" value="' + escapeAttr(meta.title || '') + '" oninput="updateMeta(\'' + pageKey + '\', \'title\', this.value, this)" maxlength="70">' +
+        '<div class="char-count' + (titleLen > 60 ? ' over' : '') + '">' + titleLen + '/60</div>' +
+        '</div>' +
+        '<div class="form-group">' +
+        '<label>Meta Description</label>' +
+        '<textarea rows="2" oninput="updateMeta(\'' + pageKey + '\', \'description\', this.value, this)" maxlength="170">' + escapeHtml(meta.description || '') + '</textarea>' +
+        '<div class="char-count' + (descLen > 160 ? ' over' : '') + '">' + descLen + '/160</div>' +
+        '</div></div>';
+
+    document.getElementById('seoFields').innerHTML = html;
+}
+
+function updateMeta(page, field, val, el) {
+    if (!config.meta[page]) config.meta[page] = {};
+    config.meta[page][field] = val;
+    var counter = el.parentElement.querySelector('.char-count');
+    var max = field === 'title' ? 60 : 160;
+    counter.textContent = val.length + '/' + max;
+    counter.className = 'char-count' + (val.length > max ? ' over' : '');
+    markChanged();
+}
+
+// ============================================
+// PUBLISH
+// ============================================
+function markChanged() {
+    hasChanges = true;
+    document.getElementById('publishBar').style.display = 'flex';
+}
+
+function resetChanges() {
+    config = JSON.parse(JSON.stringify(originalConfig));
+    hasChanges = false;
+    document.getElementById('publishBar').style.display = 'none';
+    renderDesign();
+    renderContent('index');
+    renderSeo('index');
+    toast('Wijzigingen gereset');
+}
+
+async function publishChanges() {
+    var token = localStorage.getItem('dagro-github-token');
+    var repo = localStorage.getItem('dagro-github-repo') || 'dagro06/dagro-website';
+
+    if (!token) {
+        toast('Configureer eerst je GitHub token in Setup', true);
+        showPanel('setup');
+        return;
+    }
+
+    var btn = document.getElementById('publishBtn');
+    btn.disabled = true;
+    btn.innerHTML = 'Publiceren...';
+    document.getElementById('publishStatus').textContent = 'Bezig met opslaan...';
+
+    // Update favicon in config
+    config.favicon = document.getElementById('faviconInput').value || '/favicon.svg';
+    config.lastUpdated = new Date().toISOString();
+
+    try {
+        // Get current file SHA
+        var resp = await fetch('https://api.github.com/repos/' + repo + '/contents/site-config.json', {
+            headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        var current = await resp.json();
+        var sha = current.sha;
+
+        // Commit update
+        var content = btoa(unescape(encodeURIComponent(JSON.stringify(config, null, 2))));
+        var putResp = await fetch('https://api.github.com/repos/' + repo + '/contents/site-config.json', {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + token,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify({
+                message: 'Update site config - ' + new Date().toLocaleDateString('nl-NL'),
+                content: content,
+                sha: sha
+            })
+        });
+
+        if (putResp.ok) {
+            originalConfig = JSON.parse(JSON.stringify(config));
+            hasChanges = false;
+            document.getElementById('publishBar').style.display = 'none';
+            toast('Gepubliceerd! Live binnen ~30 seconden.');
+        } else {
+            var err = await putResp.json();
+            toast('Fout: ' + (err.message || 'Onbekend'), true);
+        }
+    } catch(e) {
+        toast('Fout bij publiceren: ' + e.message, true);
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> Publiceren';
+    document.getElementById('publishStatus').textContent = 'Onopgeslagen wijzigingen';
+}
+
+// ============================================
+// FAVICON UPLOAD
+// ============================================
+async function handleFaviconUpload(input) {
+    var file = input.files[0];
+    if (!file) return;
+
+    var maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+        toast('Bestand te groot (max 2MB)', true);
+        input.value = '';
+        return;
+    }
+
+    var statusEl = document.getElementById('faviconUploadStatus');
+    statusEl.textContent = 'Uploaden...';
+    statusEl.style.color = 'var(--admin-gold)';
+
+    var token = localStorage.getItem('dagro-github-token');
+    var repo = localStorage.getItem('dagro-github-repo') || 'dagro06/dagro-website';
+
+    if (!token) {
+        toast('Configureer eerst je GitHub token in Setup', true);
+        statusEl.textContent = 'Upload mislukt';
+        statusEl.style.color = '#ef4444';
+        input.value = '';
+        return;
+    }
+
+    try {
+        // Determine filename and path
+        var ext = file.name.split('.').pop().toLowerCase();
+        var faviconPath = 'favicon.' + ext;
+
+        // Read file as base64
+        var base64 = await new Promise(function(resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var result = reader.result.split(',')[1]; // Remove data:... prefix
+                resolve(result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+        // Check if file already exists (get SHA)
+        var sha = null;
+        try {
+            var getResp = await fetch('https://api.github.com/repos/' + repo + '/contents/' + faviconPath, {
+                headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            if (getResp.ok) {
+                var existing = await getResp.json();
+                sha = existing.sha;
+            }
+        } catch(e) {}
+
+        // Also delete old favicon if extension changed
+        var oldPath = document.getElementById('faviconInput').value.replace(/^\//, '');
+        if (oldPath && oldPath !== faviconPath) {
+            try {
+                var oldResp = await fetch('https://api.github.com/repos/' + repo + '/contents/' + oldPath, {
+                    headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (oldResp.ok) {
+                    var oldFile = await oldResp.json();
+                    await fetch('https://api.github.com/repos/' + repo + '/contents/' + oldPath, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: 'Oud favicon verwijderd', sha: oldFile.sha })
+                    });
+                }
+            } catch(e) {}
+        }
+
+        // Upload file to GitHub
+        var body = {
+            message: 'Favicon bijgewerkt: ' + faviconPath,
+            content: base64
+        };
+        if (sha) body.sha = sha;
+
+        var putResp = await fetch('https://api.github.com/repos/' + repo + '/contents/' + faviconPath, {
+            method: 'PUT',
+            headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+
+        if (!putResp.ok) throw new Error('GitHub upload mislukt: ' + putResp.status);
+
+        // Update config
+        var newUrl = '/' + faviconPath;
+        document.getElementById('faviconInput').value = newUrl;
+        document.getElementById('faviconFilename').textContent = newUrl;
+
+        // Update preview
+        var previewImg = document.getElementById('faviconPreviewImg');
+        previewImg.style.display = '';
+        previewImg.src = URL.createObjectURL(file);
+
+        // Mark changes
+        markChanged();
+
+        statusEl.textContent = 'Geüpload! Publiceer om live te zetten.';
+        statusEl.style.color = '#22c55e';
+        toast('Favicon geüpload naar GitHub');
+
+    } catch(e) {
+        console.error('Favicon upload error:', e);
+        statusEl.textContent = 'Upload mislukt: ' + e.message;
+        statusEl.style.color = '#ef4444';
+        toast('Favicon upload mislukt: ' + e.message, true);
+    }
+
+    input.value = '';
+}
+
+// ============================================
+// NOTION INTEGRATION
+// ============================================
+var blogPosts = [];
+var casePosts = [];
+
+async function notionApiFetch(action, params) {
+    var key = localStorage.getItem('dagro-notion-key');
+    var url = '/api/notion?action=' + action;
+    Object.keys(params || {}).forEach(function(k) { url += '&' + k + '=' + encodeURIComponent(params[k]); });
+
+    var headers = {};
+    if (key) headers['Authorization'] = 'Bearer ' + key;
+
+    var resp = await fetch(url, { headers: headers });
+    if (!resp.ok) {
+        var err = await resp.json().catch(function() { return { error: 'Onbekende fout' }; });
+        throw new Error(err.error || 'API fout ' + resp.status);
+    }
+    return resp.json();
+}
+
+async function fetchNotionBlog() {
+    var dbId = localStorage.getItem('dagro-notion-blog-db');
+    if (!dbId) {
+        toast('Configureer eerst Blog database ID in Setup', true);
+        showPanel('setup');
+        return;
+    }
+
+    var listEl = document.getElementById('blogList');
+    listEl.innerHTML = '<p style="color: var(--admin-gold);">Blog posts ophalen uit Notion...</p>';
+
+    try {
+        blogPosts = await notionApiFetch('list', { dbId: dbId });
+        renderBlogList();
+        toast(blogPosts.length + ' blog post(s) opgehaald');
+    } catch(e) {
+        listEl.innerHTML = '<p style="color: #ef4444;">Fout: ' + e.message + '</p>';
+        toast('Kon blog posts niet ophalen: ' + e.message, true);
+    }
+}
+
+function renderBlogList() {
+    var listEl = document.getElementById('blogList');
+    if (!blogPosts.length) {
+        listEl.innerHTML = '<p style="color: var(--admin-muted);">Geen posts gevonden in de database.</p>';
+        document.getElementById('publishAllBlogBtn').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('publishAllBlogBtn').style.display = '';
+    var html = '';
+    blogPosts.forEach(function(post, i) {
+        var statusColor = post.status === 'Gepubliceerd' ? '#22c55e' : post.status === 'Klaar' ? 'var(--admin-gold)' : 'var(--admin-muted)';
+        var statusLabel = post.status || 'Draft';
+        html += '<div class="notion-item" style="display:flex; align-items:center; justify-content:space-between; padding:16px; border:1px solid var(--admin-border); border-radius:10px; margin-bottom:8px;">' +
+            '<div style="flex:1; min-width:0;">' +
+                '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
+                    '<span style="font-weight:500; color:var(--admin-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + escapeH(post.title) + '</span>' +
+                    '<span style="font-size:11px; padding:2px 8px; border-radius:4px; background:' + statusColor + '22; color:' + statusColor + '; white-space:nowrap;">' + statusLabel + '</span>' +
+                '</div>' +
+                '<div style="font-size:13px; color:var(--admin-muted);">' +
+                    (post.category ? post.category + ' · ' : '') +
+                    (post.date || '') +
+                    (post.author ? ' · ' + escapeH(post.author) : '') +
+                '</div>' +
+            '</div>' +
+            '<div style="display:flex; gap:6px; margin-left:12px;">' +
+                '<button class="btn btn-secondary btn-sm" onclick="previewBlogPost(' + i + ')" style="padding:6px 12px; font-size:12px;">Preview</button>' +
+                '<button class="btn btn-primary btn-sm" onclick="publishBlogPost(' + i + ')" style="padding:6px 12px; font-size:12px;">Publiceer</button>' +
+            '</div>' +
+        '</div>';
+    });
+    listEl.innerHTML = html;
+}
+
+async function previewBlogPost(index) {
+    var post = blogPosts[index];
+    var modal = document.getElementById('previewModal');
+    var content = document.getElementById('previewContent');
+
+    content.innerHTML = '<p style="color: var(--admin-gold);">Content laden...</p>';
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+
+    try {
+        var data = await notionApiFetch('page', { pageId: post.notionPageId });
+        content.innerHTML = '<div style="margin-bottom:16px;">' +
+            (post.category ? '<span style="font-size:12px; padding:4px 10px; background:var(--admin-gold); color:#000; border-radius:4px; font-weight:500;">' + escapeH(post.category) + '</span>' : '') +
+            '</div>' +
+            '<h1 style="font-size:28px; margin-bottom:8px; color:var(--admin-text);">' + escapeH(post.title) + '</h1>' +
+            '<p style="font-size:14px; color:var(--admin-muted); margin-bottom:24px;">' + (post.date || '') + (post.author ? ' · ' + escapeH(post.author) : '') + '</p>' +
+            '<div class="article-content" style="color:var(--admin-text); line-height:1.7;">' + data.content + '</div>';
+        // Store content for publish
+        blogPosts[index]._content = data.content;
+    } catch(e) {
+        content.innerHTML = '<p style="color:#ef4444;">Kon content niet laden: ' + e.message + '</p>';
+    }
+}
+
+function closePreview() {
+    document.getElementById('previewModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+async function publishBlogPost(index) {
+    var post = blogPosts[index];
+    toast('Blog post publiceren: ' + post.title);
+
+    try {
+        // Get content if not cached
+        if (!post._content) {
+            var data = await notionApiFetch('page', { pageId: post.notionPageId });
+            post._content = data.content;
+        }
+
+        // Build post JSON
+        var postJson = {
+            title: post.title,
+            slug: post.slug,
+            category: post.category,
+            date: post.date,
+            author: post.author,
+            excerpt: post.excerpt,
+            featuredImage: post.featuredImage,
+            content: post._content,
+            publishedAt: new Date().toISOString()
+        };
+
+        // Build/update blog index
+        var blogIndex = await loadDataFile('data/blog.json') || [];
+        var existingIdx = blogIndex.findIndex(function(p) { return p.slug === post.slug; });
+        var indexEntry = {
+            title: post.title, slug: post.slug, category: post.category,
+            date: post.date, author: post.author, excerpt: post.excerpt,
+            featuredImage: post.featuredImage, notionPageId: post.notionPageId
+        };
+        if (existingIdx >= 0) blogIndex[existingIdx] = indexEntry;
+        else blogIndex.unshift(indexEntry);
+
+        // Commit both files
+        await commitMultipleFiles([
+            { path: 'data/blog.json', content: JSON.stringify(blogIndex, null, 2) },
+            { path: 'data/posts/' + post.slug + '.json', content: JSON.stringify(postJson, null, 2) }
+        ], 'Blog: ' + post.title);
+
+        toast('Gepubliceerd! Live binnen ~30 seconden.');
+    } catch(e) {
+        toast('Publiceren mislukt: ' + e.message, true);
+    }
+}
+
+async function publishAllBlog() {
+    if (!blogPosts.length) return;
+    toast('Alle blog posts publiceren...');
+
+    try {
+        var blogIndex = [];
+        var files = [];
+
+        for (var i = 0; i < blogPosts.length; i++) {
+            var post = blogPosts[i];
+            if (!post._content) {
+                var data = await notionApiFetch('page', { pageId: post.notionPageId });
+                post._content = data.content;
+            }
+
+            blogIndex.push({
+                title: post.title, slug: post.slug, category: post.category,
+                date: post.date, author: post.author, excerpt: post.excerpt,
+                featuredImage: post.featuredImage, notionPageId: post.notionPageId
+            });
+
+            files.push({
+                path: 'data/posts/' + post.slug + '.json',
+                content: JSON.stringify({
+                    title: post.title, slug: post.slug, category: post.category,
+                    date: post.date, author: post.author, excerpt: post.excerpt,
+                    featuredImage: post.featuredImage, content: post._content,
+                    publishedAt: new Date().toISOString()
+                }, null, 2)
+            });
+        }
+
+        files.unshift({ path: 'data/blog.json', content: JSON.stringify(blogIndex, null, 2) });
+        await commitMultipleFiles(files, 'Blog: ' + blogPosts.length + ' posts gepubliceerd');
+        toast(blogPosts.length + ' blog posts gepubliceerd! Live binnen ~30 seconden.');
+    } catch(e) {
+        toast('Bulk publiceren mislukt: ' + e.message, true);
+    }
+}
+
+// ---- CASES ----
+
+async function fetchNotionCases() {
+    var dbId = localStorage.getItem('dagro-notion-cases-db');
+    if (!dbId) {
+        toast('Configureer eerst Cases database ID in Setup', true);
+        showPanel('setup');
+        return;
+    }
+
+    var listEl = document.getElementById('casesList');
+    listEl.innerHTML = '<p style="color: var(--admin-gold);">Cases ophalen uit Notion...</p>';
+
+    try {
+        casePosts = await notionApiFetch('list', { dbId: dbId });
+        renderCasesList();
+        toast(casePosts.length + ' case(s) opgehaald');
+    } catch(e) {
+        listEl.innerHTML = '<p style="color: #ef4444;">Fout: ' + e.message + '</p>';
+        toast('Kon cases niet ophalen: ' + e.message, true);
+    }
+}
+
+function renderCasesList() {
+    var listEl = document.getElementById('casesList');
+    if (!casePosts.length) {
+        listEl.innerHTML = '<p style="color: var(--admin-muted);">Geen cases gevonden in de database.</p>';
+        document.getElementById('publishAllCasesBtn').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('publishAllCasesBtn').style.display = '';
+    var html = '';
+    casePosts.forEach(function(c, i) {
+        var statusColor = c.status === 'Gepubliceerd' ? '#22c55e' : c.status === 'Klaar' ? 'var(--admin-gold)' : 'var(--admin-muted)';
+        html += '<div class="notion-item" style="display:flex; align-items:center; justify-content:space-between; padding:16px; border:1px solid var(--admin-border); border-radius:10px; margin-bottom:8px;">' +
+            '<div style="flex:1; min-width:0;">' +
+                '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
+                    '<span style="font-weight:500; color:var(--admin-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + escapeH(c.title) + '</span>' +
+                    '<span style="font-size:11px; padding:2px 8px; border-radius:4px; background:' + statusColor + '22; color:' + statusColor + '; white-space:nowrap;">' + (c.status || 'Draft') + '</span>' +
+                '</div>' +
+                '<div style="font-size:13px; color:var(--admin-muted);">' +
+                    (c.clientName ? escapeH(c.clientName) + ' · ' : '') +
+                    (c.services && c.services.length ? c.services.join(', ') + ' · ' : '') +
+                    (c.date || '') +
+                '</div>' +
+                (c.kpis && c.kpis.length ? '<div style="display:flex; gap:12px; margin-top:6px;">' +
+                    c.kpis.map(function(k) {
+                        return '<span style="font-size:12px; color:var(--admin-gold);">' + escapeH(k.value) + ' <span style="color:var(--admin-muted);">' + escapeH(k.label) + '</span></span>';
+                    }).join('') + '</div>' : '') +
+            '</div>' +
+            '<div style="display:flex; gap:6px; margin-left:12px;">' +
+                '<button class="btn btn-secondary btn-sm" onclick="previewCase(' + i + ')" style="padding:6px 12px; font-size:12px;">Preview</button>' +
+                '<button class="btn btn-primary btn-sm" onclick="publishCase(' + i + ')" style="padding:6px 12px; font-size:12px;">Publiceer</button>' +
+            '</div>' +
+        '</div>';
+    });
+    listEl.innerHTML = html;
+}
+
+async function previewCase(index) {
+    var c = casePosts[index];
+    var modal = document.getElementById('previewModal');
+    var content = document.getElementById('previewContent');
+
+    content.innerHTML = '<p style="color: var(--admin-gold);">Content laden...</p>';
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+
+    try {
+        var data = await notionApiFetch('page', { pageId: c.notionPageId });
+        var kpisHtml = c.kpis && c.kpis.length ? '<div style="display:flex; gap:24px; margin-bottom:24px; padding:16px; background:rgba(197,165,114,0.1); border-radius:10px;">' +
+            c.kpis.map(function(k) {
+                return '<div><div style="font-size:24px; font-weight:600; color:var(--admin-gold);">' + escapeH(k.value) + '</div><div style="font-size:12px; color:var(--admin-muted);">' + escapeH(k.label) + '</div></div>';
+            }).join('') + '</div>' : '';
+
+        content.innerHTML = '<div style="margin-bottom:16px;">' +
+            (c.services ? c.services.map(function(s) {
+                return '<span style="font-size:12px; padding:4px 10px; background:var(--admin-gold); color:#000; border-radius:4px; font-weight:500; margin-right:6px;">' + escapeH(s) + '</span>';
+            }).join('') : '') +
+            '</div>' +
+            '<h1 style="font-size:28px; margin-bottom:8px; color:var(--admin-text);">' + escapeH(c.title) + '</h1>' +
+            (c.clientName ? '<p style="font-size:14px; color:var(--admin-muted); margin-bottom:24px;">' + escapeH(c.clientName) + ' · ' + (c.date || '') + '</p>' : '') +
+            kpisHtml +
+            '<div class="article-content" style="color:var(--admin-text); line-height:1.7;">' + data.content + '</div>';
+        casePosts[index]._content = data.content;
+    } catch(e) {
+        content.innerHTML = '<p style="color:#ef4444;">Kon content niet laden: ' + e.message + '</p>';
+    }
+}
+
+async function publishCase(index) {
+    var c = casePosts[index];
+    toast('Case publiceren: ' + c.title);
+
+    try {
+        if (!c._content) {
+            var data = await notionApiFetch('page', { pageId: c.notionPageId });
+            c._content = data.content;
+        }
+
+        var caseJson = {
+            title: c.title, slug: c.slug, clientName: c.clientName,
+            services: c.services, date: c.date, excerpt: c.excerpt,
+            featuredImage: c.featuredImage, kpis: c.kpis,
+            content: c._content, publishedAt: new Date().toISOString()
+        };
+
+        var casesIndex = await loadDataFile('data/cases.json') || [];
+        var existingIdx = casesIndex.findIndex(function(p) { return p.slug === c.slug; });
+        var indexEntry = {
+            title: c.title, slug: c.slug, clientName: c.clientName,
+            services: c.services, date: c.date, excerpt: c.excerpt,
+            featuredImage: c.featuredImage, kpis: c.kpis, notionPageId: c.notionPageId
+        };
+        if (existingIdx >= 0) casesIndex[existingIdx] = indexEntry;
+        else casesIndex.unshift(indexEntry);
+
+        await commitMultipleFiles([
+            { path: 'data/cases.json', content: JSON.stringify(casesIndex, null, 2) },
+            { path: 'data/case-studies/' + c.slug + '.json', content: JSON.stringify(caseJson, null, 2) }
+        ], 'Case: ' + c.title);
+
+        toast('Gepubliceerd! Live binnen ~30 seconden.');
+    } catch(e) {
+        toast('Publiceren mislukt: ' + e.message, true);
+    }
+}
+
+async function publishAllCases() {
+    if (!casePosts.length) return;
+    toast('Alle cases publiceren...');
+
+    try {
+        var casesIndex = [];
+        var files = [];
+
+        for (var i = 0; i < casePosts.length; i++) {
+            var c = casePosts[i];
+            if (!c._content) {
+                var data = await notionApiFetch('page', { pageId: c.notionPageId });
+                c._content = data.content;
+            }
+
+            casesIndex.push({
+                title: c.title, slug: c.slug, clientName: c.clientName,
+                services: c.services, date: c.date, excerpt: c.excerpt,
+                featuredImage: c.featuredImage, kpis: c.kpis, notionPageId: c.notionPageId
+            });
+
+            files.push({
+                path: 'data/case-studies/' + c.slug + '.json',
+                content: JSON.stringify({
+                    title: c.title, slug: c.slug, clientName: c.clientName,
+                    services: c.services, date: c.date, excerpt: c.excerpt,
+                    featuredImage: c.featuredImage, kpis: c.kpis,
+                    content: c._content, publishedAt: new Date().toISOString()
+                }, null, 2)
+            });
+        }
+
+        files.unshift({ path: 'data/cases.json', content: JSON.stringify(casesIndex, null, 2) });
+        await commitMultipleFiles(files, 'Cases: ' + casePosts.length + ' cases gepubliceerd');
+        toast(casePosts.length + ' cases gepubliceerd! Live binnen ~30 seconden.');
+    } catch(e) {
+        toast('Bulk publiceren mislukt: ' + e.message, true);
+    }
+}
+
+// ---- GITHUB HELPERS ----
+
+function escapeH(text) {
+    if (!text) return '';
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+async function loadDataFile(path) {
+    var token = localStorage.getItem('dagro-github-token');
+    var repo = localStorage.getItem('dagro-github-repo') || 'dagro06/dagro-website';
+    try {
+        var resp = await fetch('https://api.github.com/repos/' + repo + '/contents/' + path, {
+            headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (!resp.ok) return null;
+        var file = await resp.json();
+        return JSON.parse(atob(file.content));
+    } catch(e) {
+        return null;
+    }
+}
+
+async function commitMultipleFiles(files, message) {
+    var token = localStorage.getItem('dagro-github-token');
+    var repo = localStorage.getItem('dagro-github-repo') || 'dagro06/dagro-website';
+    if (!token) throw new Error('Geen GitHub token geconfigureerd');
+
+    var apiBase = 'https://api.github.com/repos/' + repo;
+    var headers = {
+        'Authorization': 'token ' + token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+    };
+
+    // 1. Get current HEAD ref
+    var refResp = await fetch(apiBase + '/git/ref/heads/main', { headers: headers });
+    if (!refResp.ok) throw new Error('Kon branch HEAD niet ophalen');
+    var refData = await refResp.json();
+    var currentCommitSha = refData.object.sha;
+
+    // 2. Get current commit tree
+    var commitResp = await fetch(apiBase + '/git/commits/' + currentCommitSha, { headers: headers });
+    var commitData = await commitResp.json();
+    var baseTreeSha = commitData.tree.sha;
+
+    // 3. Create blobs for each file
+    var treeItems = [];
+    for (var i = 0; i < files.length; i++) {
+        var blobResp = await fetch(apiBase + '/git/blobs', {
+            method: 'POST', headers: headers,
+            body: JSON.stringify({ content: files[i].content, encoding: 'utf-8' })
+        });
+        var blobData = await blobResp.json();
+        treeItems.push({ path: files[i].path, mode: '100644', type: 'blob', sha: blobData.sha });
+    }
+
+    // 4. Create new tree
+    var treeResp = await fetch(apiBase + '/git/trees', {
+        method: 'POST', headers: headers,
+        body: JSON.stringify({ base_tree: baseTreeSha, tree: treeItems })
+    });
+    var treeData = await treeResp.json();
+
+    // 5. Create new commit
+    var newCommitResp = await fetch(apiBase + '/git/commits', {
+        method: 'POST', headers: headers,
+        body: JSON.stringify({
+            message: message, tree: treeData.sha, parents: [currentCommitSha]
+        })
+    });
+    var newCommitData = await newCommitResp.json();
+
+    // 6. Update ref
+    var updateResp = await fetch(apiBase + '/git/refs/heads/main', {
+        method: 'PATCH', headers: headers,
+        body: JSON.stringify({ sha: newCommitData.sha })
+    });
+    if (!updateResp.ok) throw new Error('Kon ref niet updaten');
+}
+
+// ============================================
+// SETUP
+// ============================================
+function loadSetup() {
+    var token = localStorage.getItem('dagro-github-token');
+    var repo = localStorage.getItem('dagro-github-repo');
+    var nKey = localStorage.getItem('dagro-notion-key');
+    var nBlog = localStorage.getItem('dagro-notion-blog-db');
+    var nCases = localStorage.getItem('dagro-notion-cases-db');
+
+    if (token) document.getElementById('githubToken').value = '••••••••••••';
+    if (repo) document.getElementById('githubRepo').value = repo;
+    if (nKey) document.getElementById('notionKey').value = '••••••••••••';
+    if (nBlog) document.getElementById('notionBlogDb').value = nBlog;
+    if (nCases) document.getElementById('notionCasesDb').value = nCases;
+}
+
+function saveSetup() {
+    var token = document.getElementById('githubToken').value;
+    var repo = document.getElementById('githubRepo').value;
+    var nKey = document.getElementById('notionKey').value;
+    var nBlog = document.getElementById('notionBlogDb').value;
+    var nCases = document.getElementById('notionCasesDb').value;
+
+    if (token && !token.startsWith('••')) localStorage.setItem('dagro-github-token', token);
+    if (repo) localStorage.setItem('dagro-github-repo', repo);
+    if (nKey && !nKey.startsWith('••')) localStorage.setItem('dagro-notion-key', nKey);
+    if (nBlog) localStorage.setItem('dagro-notion-blog-db', nBlog);
+    if (nCases) localStorage.setItem('dagro-notion-cases-db', nCases);
+
+    toast('Instellingen opgeslagen');
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.sidebar-nav a').forEach(function(a) { a.classList.remove('active'); });
+    document.getElementById('panel-' + id).classList.add('active');
+    var link = document.querySelector('[data-panel="' + id + '"]');
+    if (link) link.classList.add('active');
+}
+
+// ============================================
+// HELPERS
+// ============================================
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function escapeAttr(str) {
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function toast(msg, isError) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(function() { t.className = 'toast'; }, 3000);
+}
+</script>
+</body>
+</html>
